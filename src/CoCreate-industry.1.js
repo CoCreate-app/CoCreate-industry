@@ -21,7 +21,7 @@ function initSocketsForIndustry() {
 function createdIndustryDocument(data) {
   console.log(data);
   
-  if (data['collection'] != 'industries') return;
+  if (data['collection'] != 'industries' || data.result.length == 0) return;
   
   var form_id = data['element'];
   
@@ -55,13 +55,11 @@ function initIndustryBtn(btn) {
   btn.addEventListener('click', function(e) {
     
     console.log('industryBtn');
-    e.preventDefault();
-    e.stopPropagation();
     
-    var industryField = form.querySelector("cocreate-select[name='industry']");
+    var industryField = form.querySelector("div[name='industry']");
     
     if (industryField) {
-
+      // var industry_id = CoCreateSelect.getSelectValue(industryField);
       var industry_id = getSelectValue(industryField);
       var newOrgId = industryField.getAttribute('data-document_id');
       
@@ -96,6 +94,7 @@ function buildIndustry(data) {
     var industryField = form.querySelector("div[name='industry']");
     
     if (industryField) {
+      // var industry_id = CoCreateSelect.getSelectValue(industryField);
       var industry_id = getSelectValue(industryField);
       var newOrgId = industryField.getAttribute('data-document_id');
       
@@ -105,9 +104,9 @@ function buildIndustry(data) {
         
         if (apiKeyInput && securityKeyInput) {
           
-          // localStorage.setItem('apiKey', apiKeyInput.value);
-          // localStorage.setItem('securityKey', securityKeyInput.value);
-          // localStorage.setItem('organization_id', newOrgId);
+          localStorage.setItem('apiKey', apiKeyInput.value);
+          localStorage.setItem('securityKey', securityKeyInput.value);
+          localStorage.setItem('organization_id', newOrgId);
           
           CoCreate.updateDocument({
             'collection': 'organizations',
