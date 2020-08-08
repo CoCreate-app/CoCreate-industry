@@ -58,34 +58,43 @@ function initIndustryBtn(btn) {
     e.preventDefault();
     e.stopPropagation();
     
-    var industryField = form.querySelector("cocreate-select[name='industry']");
-    
-    if (industryField) {
-
-      var industry_id = getSelectValue(industryField);
-      var newOrgId = industryField.getAttribute('data-document_id');
-      
-      console.log(industry_id, newOrgId);
-      
-      if (industry_id && newOrgId) {
-        var json = {
-          "apiKey": config.apiKey,
-          "securityKey": config.securityKey,
-          "organization_id": config.organization_Id,
-          "industry_id": industry_id,
-          "new_organization_id": newOrgId
-        }
-        
-        CoCreateSocket.send('buildIndustry', json);
-      }
-    }
+    buildIndustryRequest(btn);
   })
 }
+
+function buildIndustryRequest(btn) {
+  const form = btn.form;
+  if (!form) {
+    return;
+  }
+  var industryField = form.querySelector("cocreate-select[name='industry']");
+  
+  if (industryField) {
+
+    var industry_id = getSelectValue(industryField);
+    var newOrgId = industryField.getAttribute('data-document_id');
+    
+    console.log(industry_id, newOrgId);
+    
+    if (industry_id && newOrgId) {
+      var json = {
+        "apiKey": config.apiKey,
+        "securityKey": config.securityKey,
+        "organization_id": config.organization_Id,
+        "industry_id": industry_id,
+        "new_organization_id": newOrgId
+      }
+      
+      CoCreateSocket.send('buildIndustry', json);
+    }
+  }
+}
+
 
 function buildIndustry(data) {
   console.log(data);
   
-  var industryBtn = document.querySelector('.industryBtn');
+  var industryBtn = document.querySelector('.industryBtn, [data-actions]');
   
   if (industryBtn) {
     var form = industryBtn.form;
@@ -105,9 +114,6 @@ function buildIndustry(data) {
         
         if (apiKeyInput && securityKeyInput) {
           
-          // localStorage.setItem('apiKey', apiKeyInput.value);
-          // localStorage.setItem('securityKey', securityKeyInput.value);
-          // localStorage.setItem('organization_id', newOrgId);
           
           CoCreate.updateDocument({
             'collection': 'organizations',
@@ -120,15 +126,15 @@ function buildIndustry(data) {
           })
           
           
-          var aTag = industryBtn.querySelector('a');
+          // var aTag = industryBtn.querySelector('a');
           
-          if (aTag) CoCreateLogic.setLinkProcess(aTag)
+          // if (aTag) CoCreateLogic.setLinkProcess(aTag)
           
   
         }
       }
     }
-    
+
   }
   
   if (data['adminUI_id']) {
@@ -138,6 +144,9 @@ function buildIndustry(data) {
   if (data['builderUI_id']) {
     localStorage.setItem('builderUI_id', data['builderUI_id']);
   }
+  
+    //. fire event
+  document.dispatchEvent(new CustomEvent('buildIndustry'));
 }
 
 // function initIndustryCreateBtn(btn) {
