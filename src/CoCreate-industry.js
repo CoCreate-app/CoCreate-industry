@@ -71,7 +71,7 @@ function buildIndustryRequest(btn) {
   
   if (industryField) {
 
-    var industry_id = getSelectValue(industryField);
+    var industry_id = CoCreateSelect.getValue(industryField);
     var newOrgId = industryField.getAttribute('data-document_id');
     
     console.log(industry_id, newOrgId);
@@ -105,7 +105,7 @@ function buildIndustry(data) {
     var industryField = form.querySelector("div[name='industry']");
     
     if (industryField) {
-      var industry_id = getSelectValue(industryField);
+      var industry_id = CoCreateSelect.getValue(industryField);
       var newOrgId = industryField.getAttribute('data-document_id');
       
       if (industry_id == data['industry_id'] && newOrgId) {
