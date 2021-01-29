@@ -20,6 +20,7 @@ function initSocketsForIndustry() {
 
 function createdIndustryDocument(data) {
   console.log(data);
+  return;
   
   if (data['collection'] != 'industries') return;
   
