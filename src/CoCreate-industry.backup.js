@@ -20,8 +20,9 @@ function initSocketsForIndustry() {
 
 function createdIndustryDocument(data) {
   console.log(data);
+  return;
   
-  if (data['collection'] != 'industries' || data.result.length == 0) return;
+  if (data['collection'] != 'industries') return;
   
   var form_id = data['element'];
   
@@ -55,35 +56,46 @@ function initIndustryBtn(btn) {
   btn.addEventListener('click', function(e) {
     
     console.log('industryBtn');
+    e.preventDefault();
+    e.stopPropagation();
     
-    var industryField = form.querySelector("div[name='industry']");
-    
-    if (industryField) {
-      // var industry_id = CoCreateSelect.getSelectValue(industryField);
-      var industry_id = getSelectValue(industryField);
-      var newOrgId = industryField.getAttribute('data-document_id');
-      
-      console.log(industry_id, newOrgId);
-      
-      if (industry_id && newOrgId) {
-        var json = {
-          "apiKey": config.apiKey,
-          "securityKey": config.securityKey,
-          "organization_id": config.organization_Id,
-          "industry_id": industry_id,
-          "new_organization_id": newOrgId
-        }
-        
-        CoCreate.socket.send('buildIndustry', json);
-      }
-    }
+    buildIndustryRequest(btn);
   })
 }
+
+function buildIndustryRequest(btn) {
+  const form = btn.form;
+  if (!form) {
+    return;
+  }
+  var industryField = form.querySelector("cocreate-select[name='industry']");
+  
+  if (industryField) {
+
+    var industry_id = CoCreateSelect.getValue(industryField);
+    var newOrgId = industryField.getAttribute('data-document_id');
+    
+    console.log(industry_id, newOrgId);
+    
+    if (industry_id && newOrgId) {
+      var json = {
+        "apiKey": config.apiKey,
+        "securityKey": config.securityKey,
+        "organization_id": config.organization_Id,
+        "industry_id": industry_id,
+        "new_organization_id": newOrgId
+      }
+      
+      CoCreate.socket.send('buildIndustry', json);
+    }
+  }
+}
+
 
 function buildIndustry(data) {
   console.log(data);
   
-  var industryBtn = document.querySelector('.industryBtn');
+  var industryBtn = document.querySelector('.industryBtn, [data-actions]');
   
   if (industryBtn) {
     var form = industryBtn.form;
@@ -94,8 +106,7 @@ function buildIndustry(data) {
     var industryField = form.querySelector("div[name='industry']");
     
     if (industryField) {
-      // var industry_id = CoCreateSelect.getSelectValue(industryField);
-      var industry_id = getSelectValue(industryField);
+      var industry_id = CoCreateSelect.getValue(industryField);
       var newOrgId = industryField.getAttribute('data-document_id');
       
       if (industry_id == data['industry_id'] && newOrgId) {
@@ -104,9 +115,6 @@ function buildIndustry(data) {
         
         if (apiKeyInput && securityKeyInput) {
           
-          localStorage.setItem('apiKey', apiKeyInput.value);
-          localStorage.setItem('securityKey', securityKeyInput.value);
-          localStorage.setItem('organization_id', newOrgId);
           
           CoCreate.crud.updateDocument({
             'collection': 'organizations',
@@ -119,15 +127,15 @@ function buildIndustry(data) {
           })
           
           
-          var aTag = industryBtn.querySelector('a');
+          // var aTag = industryBtn.querySelector('a');
           
-          if (aTag) CoCreate.logic.setLinkProcess(aTag)
+          // if (aTag) CoCreateLogic.setLinkProcess(aTag)
           
   
         }
       }
     }
-    
+
   }
   
   if (data['adminUI_id']) {
@@ -137,6 +145,9 @@ function buildIndustry(data) {
   if (data['builderUI_id']) {
     localStorage.setItem('builderUI_id', data['builderUI_id']);
   }
+  
+    //. fire event
+  document.dispatchEvent(new CustomEvent('buildIndustry'));
 }
 
 // function initIndustryCreateBtn(btn) {
