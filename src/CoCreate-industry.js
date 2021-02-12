@@ -121,14 +121,14 @@ const CoCreateIndustry = {
 
 CoCreateIndustry.init();
 
-CoCreate.actions.add({
+CoCreate.action.init({
 	action: "runIndustry",
 	endEvent: "runIndustry",
 	callback: (btn, data) => {
 		CoCreateIndustry.runIndustry(btn)
 	},
 })
-CoCreate.actions.add({
+CoCreate.action.init({
 	action: "createIndustry",
 	endEvent: "createdIndustry",
 	callback: (btn, data) => {
