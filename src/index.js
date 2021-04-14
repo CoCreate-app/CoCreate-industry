@@ -1,3 +1,8 @@
+import crud from '@cocreate/crud-client';
+import input from '@cocreate/input'
+import action from '@cocreate/action'
+import CoCreateSelect from '@cocreate/select'
+
 const CoCreateIndustry = {
 	masterDB: '5ae0cfac6fb8c4e656fdaf92', // '5ae0cfac6fb8c4e656fdaf92' /** masterDB **/,
 	init: function() {
@@ -7,14 +12,14 @@ const CoCreateIndustry = {
 		}
 		const self = this;
 
-		CoCreate.socket.listen('runIndustry', function(data) {
+		crud.socket.listen('runIndustry', function(data) {
 			self.runIndustryProcess(data)
 			document.dispatchEvent(new CustomEvent('runIndustry', {
 				detail: data
 			}))
 		})
 		
-		CoCreate.socket.listen('createIndustryNew', function(data) {
+		crud.socket.listen('createIndustryNew', function(data) {
 			console.log(data)
 			document.dispatchEvent(new CustomEvent('createIndustry', {
 				detail: data
@@ -29,12 +34,12 @@ const CoCreateIndustry = {
 		
 		const industrySelect = form.querySelector("cocreate-select[name='industry']")
 		if (industrySelect) {
-			const industry_id = CoCreate.select.getValue(industrySelect)
+			const industry_id = CoCreateSelect.getValue(industrySelect)
 			
 			const newOrgId = industrySelect.getAttribute('data-document_id');
 			
 			if (industry_id && newOrgId) {
-				CoCreate.socket.send('runIndustry', {
+				crud.socket.send('runIndustry', {
 					apiKey: config.apiKey,
 					securityKey: config.securityKey,
 					organization_id: config.organization_Id,
@@ -95,7 +100,7 @@ const CoCreateIndustry = {
 		//. get form data
 		elements.forEach(el => {
 			let name = el.getAttribute('name')
-			let value = CoCreate.input.getValue(el) || el.getAttribute('value')
+			let value = input.getValue(el) || el.getAttribute('value')
 			if (!name || !value) return;
 			if (el.getAttribute('data-type') == 'array') {
 				value = [value];
@@ -108,7 +113,7 @@ const CoCreateIndustry = {
 		data['organization_id'] = config.organization_Id;
 		
 		// return;
-		CoCreate.socket.send('createIndustryNew', {
+		crud.socket.send('createIndustryNew', {
 			apiKey: config.apiKey,
 			securityKey: config.securityKey,
 			organization_id: config.organization_Id,
@@ -121,14 +126,14 @@ const CoCreateIndustry = {
 
 CoCreateIndustry.init();
 
-CoCreate.action.init({
+action.init({
 	action: "runIndustry",
 	endEvent: "runIndustry",
 	callback: (btn, data) => {
 		CoCreateIndustry.runIndustry(btn)
 	},
 })
-CoCreate.action.init({
+action.init({
 	action: "createIndustry",
 	endEvent: "createdIndustry",
 	callback: (btn, data) => {
