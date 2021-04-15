@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.1...v1.0.2) (2021-04-15)
+
+
+### Bug Fixes
+
+* update packages ([beef415](https://github.com/CoCreate-app/CoCreate-industry/commit/beef415861855a1cbc21fe5b664a9c5d6fe494e9))
+
 ## [1.0.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.0...v1.0.1) (2021-03-29)
 
 
