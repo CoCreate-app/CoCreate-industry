@@ -60,6 +60,7 @@
   },
   "dependencies": {
     "@cocreate/action": "^1.0.0",
+    "@cocreate/crdt": "^1.0.11",
     "@cocreate/crud-client": "^1.0.0",
     "@cocreate/docs": "^1.0.3",
     "@cocreate/input": "^1.0.0",
