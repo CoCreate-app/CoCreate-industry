@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.2...v1.0.3) (2021-04-19)
+
+
+### Bug Fixes
+
+* ci and build process ([22b9e95](https://github.com/CoCreate-app/CoCreate-industry/commit/22b9e95a0fd1cdef33bbfdcf80879726eaffaa20))
+* npm publish and cdn deployment ([9150fdd](https://github.com/CoCreate-app/CoCreate-industry/commit/9150fdd75a6e67432d6f9ccce7f84342ead90f15))
+
 ## [1.0.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.1...v1.0.2) (2021-04-15)
 
 
