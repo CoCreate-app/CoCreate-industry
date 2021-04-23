@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.5...v1.0.6) (2021-04-23)
+
+
+### Bug Fixes
+
+* readme and documentation. Removed securitykeys ([aa9241e](https://github.com/CoCreate-app/CoCreate-industry/commit/aa9241ea0e0c6e8cc6b45af63d58a8b76dc8a21a))
+
 ## [1.0.5](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.4...v1.0.5) (2021-04-23)
 
 
