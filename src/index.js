@@ -41,7 +41,6 @@ const CoCreateIndustry = {
 			if (industry_id && newOrgId) {
 				crud.socket.send('runIndustry', {
 					apiKey: config.apiKey,
-					securityKey: config.securityKey,
 					organization_id: config.organization_Id,
 					industry_id: industry_id,
 					new_organization_id: newOrgId,
@@ -64,8 +63,6 @@ const CoCreateIndustry = {
 				const newOrgId = industrySelect.getAttribute('data-document_id');
 				if (industry_id == data['industry_id'] && newOrgId) {
 					const apiKeyInput = form.querySelector("input[name='apiKey']");
-					const securityKeyInput = form.querySelector("input[name='securityKey']");
-					
 					// CoCreate.crud.updateDocument({
 					// 	collection: 'organizations',
 					// 	document_id: newOrgId,
@@ -115,7 +112,6 @@ const CoCreateIndustry = {
 		// return;
 		crud.socket.send('createIndustryNew', {
 			apiKey: config.apiKey,
-			securityKey: config.securityKey,
 			organization_id: config.organization_Id,
 			db: this.masterDB,
 			collection: 'industries',
