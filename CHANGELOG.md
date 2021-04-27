@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.7...v1.0.8) (2021-04-27)
+
+
+### Bug Fixes
+
+* add host in docs ([a876ea5](https://github.com/CoCreate-app/CoCreate-industry/commit/a876ea5434da463d2f6c153256c70dcdb72835e9))
+
 ## [1.0.7](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.6...v1.0.7) (2021-04-27)
 
 
