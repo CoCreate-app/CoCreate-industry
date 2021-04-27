@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.6...v1.0.7) (2021-04-27)
+
+
+### Bug Fixes
+
+* Update to readme, demo, added cdn scripts ([6ac5900](https://github.com/CoCreate-app/CoCreate-industry/commit/6ac5900562720f6922037b974ee1631158aea8d2))
+
 ## [1.0.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.5...v1.0.6) (2021-04-23)
 
 
