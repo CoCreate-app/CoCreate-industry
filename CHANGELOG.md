@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.10...v1.0.11) (2021-06-06)
+
+
+### Bug Fixes
+
+* update packages, add uuid, add data-parse to demos ([7915e39](https://github.com/CoCreate-app/CoCreate-industry/commit/7915e39236c8da3e0ed11716ce8dda516eade51d))
+
 ## [1.0.10](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.9...v1.0.10) (2021-06-06)
 
 
