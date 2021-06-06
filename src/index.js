@@ -34,8 +34,9 @@ const CoCreateIndustry = {
 		
 		const industrySelect = form.querySelector("cocreate-select[name='industry']")
 		if (industrySelect) {
-			const industry_id = CoCreateSelect.getValue(industrySelect)
-			
+			// const industry_id = CoCreateSelect.getValue(industrySelect)
+			const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
+			console.log('industryID-1', industry_id)
 			const newOrgId = industrySelect.getAttribute('data-document_id');
 			
 			if (industry_id && newOrgId) {
@@ -59,7 +60,8 @@ const CoCreateIndustry = {
 			
 			const industrySelect = form.querySelector("cocreate-select[name='industry']");
 			if (industrySelect) {
-				const industry_id = CoCreate.select.getValue(industrySelect)
+				const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
+				console.log('industryID-2', industry_id)
 				const newOrgId = industrySelect.getAttribute('data-document_id');
 				if (industry_id == data['industry_id'] && newOrgId) {
 					const apiKeyInput = form.querySelector("input[name='apiKey']");
