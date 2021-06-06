@@ -1,7 +1,7 @@
 {
   "name": "@cocreate/industry",
   "version": "1.0.9",
-  "description": "A simple industry component in vanilla javascript. Easily configured using HTML5 data-attributes and/or JavaScript API.",
+  "description": "An Exhaustive business app template based on vanilla javascript similar to a website template featuring websites, specialty crm, email templates for creating complex business workspace/shell. Easily configured using HTML5 data-attributes and/or JavaScript API.",
   "keywords": [
     "industry",
     "cocreate",
