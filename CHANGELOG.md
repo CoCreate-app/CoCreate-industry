@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.11...v1.0.12) (2021-06-16)
+
+
+### Bug Fixes
+
+* added header for seo ([b3d9ce2](https://github.com/CoCreate-app/CoCreate-industry/commit/b3d9ce28429df46f885211afaf341521e31ddd08))
+
 ## [1.0.11](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.10...v1.0.11) (2021-06-06)
 
 
