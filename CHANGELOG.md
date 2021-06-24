@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.12...v1.0.13) (2021-06-24)
+
+
+### Bug Fixes
+
+* update all [@cocreate](https://github.com/cocreate) to use latest versions ([0601d46](https://github.com/CoCreate-app/CoCreate-industry/commit/0601d4607a0b39b47bdb72852eb03b947b79000d))
+
 ## [1.0.12](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.11...v1.0.12) (2021-06-16)
 
 
