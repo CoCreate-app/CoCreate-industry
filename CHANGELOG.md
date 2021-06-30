@@ -1,3 +1,10 @@
+## [1.0.16](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.15...v1.0.16) (2021-06-30)
+
+
+### Bug Fixes
+
+* automated and manual workflows ([e78d60d](https://github.com/CoCreate-app/CoCreate-industry/commit/e78d60d8ad3801281961776f06cf936520b23264))
+
 ## [1.0.15](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.14...v1.0.15) (2021-06-25)
 
 
