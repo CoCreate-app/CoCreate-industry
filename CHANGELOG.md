@@ -1,3 +1,10 @@
+## [1.0.19](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.18...v1.0.19) (2021-07-10)
+
+
+### Bug Fixes
+
+* gitignore all logs ([b183be2](https://github.com/CoCreate-app/CoCreate-industry/commit/b183be2f49644ea3e47564adbc9a6c6fd5986abd))
+
 ## [1.0.18](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.17...v1.0.18) (2021-07-07)
 
 
