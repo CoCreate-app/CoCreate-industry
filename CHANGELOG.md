@@ -1,3 +1,11 @@
+## [1.0.20](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.19...v1.0.20) (2021-07-13)
+
+
+### Bug Fixes
+
+* add yarn lockfile to git ignore ([64306f1](https://github.com/CoCreate-app/CoCreate-industry/commit/64306f134c17e1cccd5260e182e632d21e0b04d2))
+* remove yarn.lock ([e694a31](https://github.com/CoCreate-app/CoCreate-industry/commit/e694a31de86e8aa35a25286850b9eb7c8b4e8c63))
+
 ## [1.0.19](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.18...v1.0.19) (2021-07-10)
 
 
