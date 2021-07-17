@@ -1,3 +1,11 @@
+## [1.0.22](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.21...v1.0.22) (2021-07-17)
+
+
+### Bug Fixes
+
+* init and update demos scripts ([079482c](https://github.com/CoCreate-app/CoCreate-industry/commit/079482c9deb260d180f02ad300272e20535f25ad))
+* workflows ([ac24ea2](https://github.com/CoCreate-app/CoCreate-industry/commit/ac24ea27cd4096f67c2f824ccfabb598a5e10ab3))
+
 ## [1.0.21](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.20...v1.0.21) (2021-07-14)
 
 
