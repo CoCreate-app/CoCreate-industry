@@ -1,3 +1,10 @@
+## [1.0.24](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.23...v1.0.24) (2021-07-22)
+
+
+### Bug Fixes
+
+* remove runIndustryProcess ([a90a6d4](https://github.com/CoCreate-app/CoCreate-industry/commit/a90a6d4d4b174285246906da93fdad1ce3c729df))
+
 ## [1.0.23](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.22...v1.0.23) (2021-07-22)
 
 
