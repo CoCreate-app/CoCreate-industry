@@ -12,84 +12,21 @@ const CoCreateIndustry = {
 		}
 		const self = this;
 
+		crud.socket.listen('createIndustry', function(data) {
+			document.dispatchEvent(new CustomEvent('createIndustry', {
+				detail: data
+			}))
+		})
+
 		crud.socket.listen('runIndustry', function(data) {
-			self.runIndustryProcess(data)
 			document.dispatchEvent(new CustomEvent('runIndustry', {
 				detail: data
 			}))
 		})
 		
-		crud.socket.listen('createIndustry', function(data) {
-			console.log(data)
-			document.dispatchEvent(new CustomEvent('createIndustry', {
-				detail: data
-			}))
-		})
 	},
 	
-	/** run industry action **/
-	runIndustry: function(btn) {
-		const form = btn.closest('form')
-		if (!form) return;
-		
-		const industrySelect = form.querySelector("cocreate-select[name='industry']")
-		if (industrySelect) {
-			// const industry_id = CoCreateSelect.getValue(industrySelect)
-			const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
-			console.log('industryID-1', industry_id)
-			const newOrgId = industrySelect.getAttribute('data-document_id');
-			
-			if (industry_id && newOrgId) {
-				crud.socket.send('runIndustry', {
-					apiKey: config.apiKey,
-					organization_id: config.organization_Id,
-					industry_id: industry_id,
-					new_organization_id: newOrgId,
-					db: this.masterDB
-				})
-			}
-			
-		}
-	},
-	
-	runIndustryProcess: function(data) {
-		const industryBtn = document.querySelector('[data-actions]');
-		if (industryBtn) {
-			const form = industryBtn.form;
-			if (!form) return;
-			
-			const industrySelect = form.querySelector("cocreate-select[name='industry']");
-			if (industrySelect) {
-				const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
-				console.log('industryID-2', industry_id)
-				const newOrgId = industrySelect.getAttribute('data-document_id');
-				if (industry_id == data['industry_id'] && newOrgId) {
-					const apiKeyInput = form.querySelector("input[name='apiKey']");
-					// CoCreate.crud.updateDocument({
-					// 	collection: 'organizations',
-					// 	document_id: newOrgId,
-					// 	data: {
-					// 		adminUI_id: data['adminUI_id'],
-					// 		builderUI_id: data['builderUI_id']
-					// 	}
-					// })
-				}
-			}
-		}
-		
-		// if (data['adminUI_id']) 
-		// 	localStorage.setItem('adminUI_id', data['adminUI_id']);
-
-		// if (data['builderUI_id']) 
-		// 	localStorage.setItem('builderUI_id', data['builderUI_id']);
-		
-		// document.dispatchEvent(new CustomEvent('runIndustry'), {
-		// 	detail: data
-		// })
-
-	},
-	
-	createIndustryDocument: function(btn) {
+	createIndustry: function(btn) {
 		let form = btn.closest("form");
 		if (!form) return;
 		
@@ -120,6 +57,29 @@ const CoCreateIndustry = {
 			data: data
 		}, room);
 	},
+	
+	runIndustry: function(btn) {
+		const form = btn.closest('form')
+		if (!form) return;
+		
+		const industrySelect = form.querySelector("cocreate-select[name='industry']")
+		if (industrySelect) {
+			const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
+			console.log('industryID-1', industry_id)
+			const newOrgId = industrySelect.getAttribute('data-document_id');
+			
+			if (industry_id && newOrgId) {
+				crud.socket.send('runIndustry', {
+					apiKey: config.apiKey,
+					organization_id: config.organization_Id,
+					industry_id: industry_id,
+					new_organization_id: newOrgId,
+					db: this.masterDB
+				})
+			}
+			
+		}
+	},
 }
 
 CoCreateIndustry.init();
@@ -135,7 +95,7 @@ action.init({
 	action: "createIndustry",
 	endEvent: "createdIndustry",
 	callback: (btn, data) => {
-		CoCreateIndustry.createIndustryDocument(btn)
+		CoCreateIndustry.createIndustry(btn)
 	},
 })
 
