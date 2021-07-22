@@ -1,3 +1,10 @@
+## [1.0.23](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.22...v1.0.23) (2021-07-22)
+
+
+### Bug Fixes
+
+* createIndustryNew renamed to createIndustry ([d595942](https://github.com/CoCreate-app/CoCreate-industry/commit/d595942b975d576f581cb4a0ff115a2536799c99))
+
 ## [1.0.22](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.21...v1.0.22) (2021-07-17)
 
 
