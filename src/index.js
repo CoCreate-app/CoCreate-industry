@@ -19,7 +19,7 @@ const CoCreateIndustry = {
 			}))
 		})
 		
-		crud.socket.listen('createIndustryNew', function(data) {
+		crud.socket.listen('createIndustry', function(data) {
 			console.log(data)
 			document.dispatchEvent(new CustomEvent('createIndustry', {
 				detail: data
@@ -77,11 +77,11 @@ const CoCreateIndustry = {
 			}
 		}
 		
-		if (data['adminUI_id']) 
-			localStorage.setItem('adminUI_id', data['adminUI_id']);
+		// if (data['adminUI_id']) 
+		// 	localStorage.setItem('adminUI_id', data['adminUI_id']);
 
-		if (data['builderUI_id']) 
-			localStorage.setItem('builderUI_id', data['builderUI_id']);
+		// if (data['builderUI_id']) 
+		// 	localStorage.setItem('builderUI_id', data['builderUI_id']);
 		
 		// document.dispatchEvent(new CustomEvent('runIndustry'), {
 		// 	detail: data
