@@ -1,3 +1,10 @@
+## [1.0.25](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.24...v1.0.25) (2021-07-23)
+
+
+### Bug Fixes
+
+* creates new industry in org defined in config ([f22cce8](https://github.com/CoCreate-app/CoCreate-industry/commit/f22cce8ee314c237dd40ec714fe43517ec7853f7))
+
 ## [1.0.24](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.23...v1.0.24) (2021-07-22)
 
 
