@@ -49,10 +49,10 @@ const CoCreateIndustry = {
 		data['organization_id'] = config.organization_Id;
 		
 		// return;
-		crud.socket.send('createIndustryNew', {
+		crud.socket.send('createIndustry', {
 			apiKey: config.apiKey,
 			organization_id: config.organization_Id,
-			db: this.masterDB,
+			db: config.organization_Id,
 			collection: 'industries',
 			data: data
 		}, room);
@@ -74,7 +74,7 @@ const CoCreateIndustry = {
 					organization_id: config.organization_Id,
 					industry_id: industry_id,
 					new_organization_id: newOrgId,
-					db: this.masterDB
+					db: config.organization_Id
 				})
 			}
 			
