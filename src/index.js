@@ -4,12 +4,9 @@ import action from '@cocreate/action'
 import CoCreateSelect from '@cocreate/select'
 
 const CoCreateIndustry = {
-	masterDB: '5ae0cfac6fb8c4e656fdaf92', // '5ae0cfac6fb8c4e656fdaf92' /** masterDB **/,
+	// masterDB: '5ae0cfac6fb8c4e656fdaf92', // '5ae0cfac6fb8c4e656fdaf92' /** masterDB **/,
 	init: function() {
 		
-		if (config.organization_Id) {
-			this.masterDB = config.organization_Id;
-		}
 		const self = this;
 
 		crud.socket.listen('createIndustry', function(data) {
@@ -65,7 +62,6 @@ const CoCreateIndustry = {
 		const industrySelect = form.querySelector("cocreate-select[name='industry']")
 		if (industrySelect) {
 			const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
-			console.log('industryID-1', industry_id)
 			const newOrgId = industrySelect.getAttribute('data-document_id');
 			
 			if (industry_id && newOrgId) {
@@ -73,8 +69,8 @@ const CoCreateIndustry = {
 					apiKey: config.apiKey,
 					organization_id: config.organization_Id,
 					industry_id: industry_id,
-					new_organization_id: newOrgId,
-					db: config.organization_Id
+					newOrg_id: newOrgId,
+					// db: config.organization_Id
 				})
 			}
 			
