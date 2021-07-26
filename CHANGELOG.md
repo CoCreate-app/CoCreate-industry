@@ -1,3 +1,10 @@
+## [1.0.26](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.25...v1.0.26) (2021-07-26)
+
+
+### Bug Fixes
+
+* refactored to newOrg_id convention ([1d0e655](https://github.com/CoCreate-app/CoCreate-industry/commit/1d0e655aa90d3a0d3f16d07a7290cb3b23d1422b))
+
 ## [1.0.25](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.24...v1.0.25) (2021-07-23)
 
 
