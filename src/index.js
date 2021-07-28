@@ -27,7 +27,7 @@ const CoCreateIndustry = {
 		let form = btn.closest("form");
 		if (!form) return;
 		
-		let elements = form.querySelectorAll("[data-collection='industries'][name]");
+		let elements = form.querySelectorAll("[collection='industries'][name]");
 		
 		let data = {};
 		//. get form data
@@ -62,7 +62,7 @@ const CoCreateIndustry = {
 		const industrySelect = form.querySelector("cocreate-select[name='industry']")
 		if (industrySelect) {
 			const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
-			const newOrgId = industrySelect.getAttribute('data-document_id');
+			const newOrgId = industrySelect.getAttribute('document_id');
 			
 			if (industry_id && newOrgId) {
 				crud.socket.send('runIndustry', {
