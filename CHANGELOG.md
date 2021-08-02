@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.0...v1.1.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* remove data- from attributes ([ca1ba43](https://github.com/CoCreate-app/CoCreate-industry/commit/ca1ba43cfe48c6de4ceffda2a98b4670fc47bd11))
+* remove data- from fetch, pass and filter ([887ee55](https://github.com/CoCreate-app/CoCreate-industry/commit/887ee55bddb563be7b4ce4017d6deb241fe5e857))
+* update data-fullscreen to fullscreen ([4def5fa](https://github.com/CoCreate-app/CoCreate-industry/commit/4def5fa86f77e81dabf3ea9a825168fdf2f1bfb2))
+
 # [1.1.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.0.26...v1.1.0) (2021-07-28)
 
 
