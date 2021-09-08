@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.9...v1.1.10) (2021-09-08)
+
+
+### Bug Fixes
+
+* update dependencies ([c557c55](https://github.com/CoCreate-app/CoCreate-industry/commit/c557c55bd41e6853d353b9c14df3334829ed4180))
+
 ## [1.1.9](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.8...v1.1.9) (2021-09-04)
 
 
