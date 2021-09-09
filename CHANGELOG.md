@@ -1,3 +1,10 @@
+## [1.1.11](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.10...v1.1.11) (2021-09-09)
+
+
+### Bug Fixes
+
+* CoCreate.config directory, path, name and  public ([08ee4ba](https://github.com/CoCreate-app/CoCreate-industry/commit/08ee4ba3d2b27a3fff92e776dcdc271491fa4e07))
+
 ## [1.1.10](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.9...v1.1.10) (2021-09-08)
 
 
