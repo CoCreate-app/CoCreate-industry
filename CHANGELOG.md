@@ -1,3 +1,10 @@
+## [1.1.15](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.14...v1.1.15) (2021-09-12)
+
+
+### Bug Fixes
+
+* update sidenav to use resize and toggle ([343af15](https://github.com/CoCreate-app/CoCreate-industry/commit/343af1505bc259feff1d49b9e82189fe98c52dc7))
+
 ## [1.1.14](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.13...v1.1.14) (2021-09-09)
 
 
