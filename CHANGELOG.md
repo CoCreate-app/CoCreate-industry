@@ -1,3 +1,11 @@
+## [1.1.24](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.23...v1.1.24) (2021-10-05)
+
+
+### Bug Fixes
+
+* update dependencies ([7631ae2](https://github.com/CoCreate-app/CoCreate-industry/commit/7631ae238a69829c66d2e2ff4f7269f2db721320))
+* website_id in CoCreate.config ([f00f449](https://github.com/CoCreate-app/CoCreate-industry/commit/f00f449ae1b80772d2a2391be1cdc819e5f4dc65))
+
 ## [1.1.23](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.22...v1.1.23) (2021-10-04)
 
 
