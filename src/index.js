@@ -46,7 +46,7 @@ const CoCreateIndustry = {
 		data['organization_id'] = config.organization_Id;
 		
 		// return;
-		crud.socket.send('createIndustry', {
+		crud.send('createIndustry', {
 			apiKey: config.apiKey,
 			organization_id: config.organization_Id,
 			db: config.organization_Id,
@@ -65,7 +65,7 @@ const CoCreateIndustry = {
 			const newOrgId = industrySelect.getAttribute('document_id');
 			
 			if (industry_id && newOrgId) {
-				crud.socket.send('runIndustry', {
+				crud.send('runIndustry', {
 					apiKey: config.apiKey,
 					organization_id: config.organization_Id,
 					industry_id: industry_id,
@@ -87,6 +87,7 @@ action.init({
 		CoCreateIndustry.runIndustry(btn)
 	},
 })
+
 action.init({
 	action: "createIndustry",
 	endEvent: "createdIndustry",
