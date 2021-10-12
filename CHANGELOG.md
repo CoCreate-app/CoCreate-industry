@@ -1,3 +1,10 @@
+## [1.1.26](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.25...v1.1.26) (2021-10-12)
+
+
+### Bug Fixes
+
+* updte to crud.send ([795061d](https://github.com/CoCreate-app/CoCreate-industry/commit/795061de751c4eeb1fbbe06c6eb78fc9b5871484))
+
 ## [1.1.25](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.24...v1.1.25) (2021-10-06)
 
 
