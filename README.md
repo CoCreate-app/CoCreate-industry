@@ -1,6 +1,6 @@
 # CoCreate-industry
 
-An Exhaustive business app template based on vanilla javascript similar to a website template featuring websites, specialty crm, email templates for creating complex business workspace/shell. Easily configured using HTML5 data-attributes and/or JavaScript API. Take it for a spin in our [playground!](https://cocreate.app/docs/industry)
+An Exhaustive business app template based on vanilla javascript similar to a website template featuring websites, specialty crm, email templates for creating complex business workspace/shell. Easily configured using HTML5 attributes and/or JavaScript API. Take it for a spin in our [playground!](https://cocreate.app/docs/industry)
 
 ![minified](https://img.badgesize.io/https://cdn.cocreate.app/industry/latest/CoCreate-industry.min.js?style=flat-square&label=minified&color=orange)
 ![gzip](https://img.badgesize.io/https://cdn.cocreate.app/industry/latest/CoCreate-industry.min.js?compression=gzip&style=flat-square&label=gzip&color=yellow)
