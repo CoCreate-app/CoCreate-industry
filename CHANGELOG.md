@@ -1,3 +1,11 @@
+## [1.1.30](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.29...v1.1.30) (2021-10-14)
+
+
+### Bug Fixes
+
+* updated crud.socket.listen to crud.listen ([a0d3ec7](https://github.com/CoCreate-app/CoCreate-industry/commit/a0d3ec7f87053b95002e2eccd8a556948586762b))
+* updated dependencies ([d089cc2](https://github.com/CoCreate-app/CoCreate-industry/commit/d089cc2defc2d0d90baf6c3294783f3ebc43ac75))
+
 ## [1.1.29](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.28...v1.1.29) (2021-10-13)
 
 
