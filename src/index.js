@@ -9,13 +9,13 @@ const CoCreateIndustry = {
 		
 		const self = this;
 
-		crud.socket.listen('createIndustry', function(data) {
+		crud.listen('createIndustry', function(data) {
 			document.dispatchEvent(new CustomEvent('createIndustry', {
 				detail: data
 			}))
 		})
 
-		crud.socket.listen('runIndustry', function(data) {
+		crud.listen('runIndustry', function(data) {
 			document.dispatchEvent(new CustomEvent('runIndustry', {
 				detail: data
 			}))
