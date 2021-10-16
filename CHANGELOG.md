@@ -1,3 +1,10 @@
+## [1.1.34](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.33...v1.1.34) (2021-10-16)
+
+
+### Bug Fixes
+
+* update socket package to fix bug in docs ([2907dac](https://github.com/CoCreate-app/CoCreate-industry/commit/2907dac19ae1570cd9ddf7b711df97aca683eb27))
+
 ## [1.1.33](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.32...v1.1.33) (2021-10-15)
 
 
