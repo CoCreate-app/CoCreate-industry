@@ -1,8 +1,7 @@
 import crud from '@cocreate/crud-client';
-import input from '@cocreate/input'
+import input from '@cocreate/elements'
 import action from '@cocreate/action'
-import CoCreateSelect from '@cocreate/select'
-
+// 
 const CoCreateIndustry = {
 	// masterDB: '5ae0cfac6fb8c4e656fdaf92', // '5ae0cfac6fb8c4e656fdaf92' /** masterDB **/,
 	init: function() {
