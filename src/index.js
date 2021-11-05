@@ -1,24 +1,22 @@
 import crud from '@cocreate/crud-client';
-import input from '@cocreate/elements'
-import action from '@cocreate/action'
+import input from '@cocreate/elements';
+import action from '@cocreate/action';
 // 
 const CoCreateIndustry = {
 	// masterDB: '5ae0cfac6fb8c4e656fdaf92', // '5ae0cfac6fb8c4e656fdaf92' /** masterDB **/,
 	init: function() {
 		
-		const self = this;
-
 		crud.listen('createIndustry', function(data) {
 			document.dispatchEvent(new CustomEvent('createIndustry', {
 				detail: data
-			}))
-		})
+			}));
+		});
 
 		crud.listen('runIndustry', function(data) {
 			document.dispatchEvent(new CustomEvent('runIndustry', {
 				detail: data
-			}))
-		})
+			}));
+		});
 		
 	},
 	
@@ -31,14 +29,14 @@ const CoCreateIndustry = {
 		let data = {};
 		//. get form data
 		elements.forEach(el => {
-			let name = el.getAttribute('name')
-			let value = input.getValue(el) || el.getAttribute('value')
+			let name = el.getAttribute('name');
+			let value = el.getValue(el) || el.getAttribute('value');
 			if (!name || !value) return;
 			if (el.getAttribute('data-type') == 'array') {
 				value = [value];
 			}
 			data[name] = value;
-		})
+		});
 		
 		const room = config.organization_Id;
 
@@ -55,12 +53,12 @@ const CoCreateIndustry = {
 	},
 	
 	runIndustry: function(btn) {
-		const form = btn.closest('form')
+		const form = btn.closest('form');
 		if (!form) return;
 		
-		const industrySelect = form.querySelector("cocreate-select[name='industry']")
+		const industrySelect = form.querySelector("cocreate-select[name='industry']");
 		if (industrySelect) {
-			const industry_id = industrySelect.selectedOptions[0].getAttribute('value')
+			const industry_id = industrySelect.selectedOptions[0].getAttribute('value');
 			const newOrgId = industrySelect.getAttribute('document_id');
 			
 			if (industry_id && newOrgId) {
@@ -70,12 +68,12 @@ const CoCreateIndustry = {
 					industry_id: industry_id,
 					newOrg_id: newOrgId,
 					// db: config.organization_Id
-				})
+				});
 			}
 			
 		}
 	},
-}
+};
 
 CoCreateIndustry.init();
 
@@ -83,17 +81,17 @@ action.init({
 	action: "runIndustry",
 	endEvent: "runIndustry",
 	callback: (btn, data) => {
-		CoCreateIndustry.runIndustry(btn)
+		CoCreateIndustry.runIndustry(btn);
 	},
-})
+});
 
 action.init({
 	action: "createIndustry",
 	endEvent: "createdIndustry",
 	callback: (btn, data) => {
-		CoCreateIndustry.createIndustry(btn)
+		CoCreateIndustry.createIndustry(btn);
 	},
-})
+});
 
 
 export default CoCreateIndustry;
