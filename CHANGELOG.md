@@ -1,3 +1,10 @@
+## [1.1.42](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.41...v1.1.42) (2021-11-05)
+
+
+### Bug Fixes
+
+* element for getValue was not defined correctly ([a76b37b](https://github.com/CoCreate-app/CoCreate-industry/commit/a76b37b5684179e12bc2adaa225dfee79b798b8a))
+
 ## [1.1.41](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.40...v1.1.41) (2021-11-05)
 
 
