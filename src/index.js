@@ -76,8 +76,6 @@ const CoCreateIndustry = {
 	},
 };
 
-CoCreateIndustry.init();
-
 action.init({
 	action: "runIndustry",
 	endEvent: "runIndustry",
@@ -94,5 +92,6 @@ action.init({
 	},
 });
 
+CoCreateIndustry.init();
 
 export default CoCreateIndustry;
