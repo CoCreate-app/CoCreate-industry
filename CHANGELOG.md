@@ -1,3 +1,10 @@
+## [1.1.44](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.43...v1.1.44) (2021-11-07)
+
+
+### Bug Fixes
+
+* add init() directly above export default to fix bug in firefox ([dcae07a](https://github.com/CoCreate-app/CoCreate-industry/commit/dcae07a4501e19d0b30acc53ab553ce48872d844))
+
 ## [1.1.43](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.42...v1.1.43) (2021-11-06)
 
 
