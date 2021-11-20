@@ -1,3 +1,10 @@
+## [1.1.50](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.49...v1.1.50) (2021-11-20)
+
+
+### Bug Fixes
+
+* remove cdn.CoCreate.min.css ([e58a784](https://github.com/CoCreate-app/CoCreate-industry/commit/e58a784d5056112d92ea18b06bd4b4fcca81749f))
+
 ## [1.1.49](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.48...v1.1.49) (2021-11-20)
 
 
