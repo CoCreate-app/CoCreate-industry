@@ -1,3 +1,11 @@
+## [1.1.52](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.51...v1.1.52) (2021-11-26)
+
+
+### Bug Fixes
+
+* docs sidenav width ([5975eeb](https://github.com/CoCreate-app/CoCreate-industry/commit/5975eebe87d0df653d6dfa80bfab2877b18ebcb4))
+* updated action dependency to actions ([aa5cc0a](https://github.com/CoCreate-app/CoCreate-industry/commit/aa5cc0a91cc795021b6ac57885999593c97ce0ca))
+
 ## [1.1.51](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.50...v1.1.51) (2021-11-23)
 
 
