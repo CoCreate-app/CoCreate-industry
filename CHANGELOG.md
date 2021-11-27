@@ -1,3 +1,10 @@
+## [1.1.53](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.52...v1.1.53) (2021-11-27)
+
+
+### Bug Fixes
+
+* update docs api and cocreateJS script ([dfe6282](https://github.com/CoCreate-app/CoCreate-industry/commit/dfe6282f0f5de99563a5df3f4fc1c981cd5308c1))
+
 ## [1.1.52](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.51...v1.1.52) (2021-11-26)
 
 
