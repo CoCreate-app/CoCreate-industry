@@ -1,3 +1,11 @@
+## [1.1.55](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.54...v1.1.55) (2021-11-27)
+
+
+### Bug Fixes
+
+* actions import typo ([c635f64](https://github.com/CoCreate-app/CoCreate-industry/commit/c635f64b78cd0ba51436537352fe2932915b8818))
+* update dependencies ([6d76a64](https://github.com/CoCreate-app/CoCreate-industry/commit/6d76a64b450cfe90bd4bd5c06c020911a39d125a))
+
 ## [1.1.54](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.53...v1.1.54) (2021-11-27)
 
 
