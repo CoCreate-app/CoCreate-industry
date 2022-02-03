@@ -1,3 +1,10 @@
+## [1.1.60](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.59...v1.1.60) (2022-02-03)
+
+
+### Bug Fixes
+
+* replaced show and hide class hidden with attribute hidden ([bf4acbd](https://github.com/CoCreate-app/CoCreate-industry/commit/bf4acbd5d16c2f59c754c0d40c2fe06a9ac95ab0))
+
 ## [1.1.59](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.58...v1.1.59) (2022-02-01)
 
 
