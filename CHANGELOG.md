@@ -1,3 +1,10 @@
+## [1.1.63](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.62...v1.1.63) (2022-02-16)
+
+
+### Bug Fixes
+
+* update action param to name ([1bccdb3](https://github.com/CoCreate-app/CoCreate-industry/commit/1bccdb31d548dae8c35db929ed37865a6676a075))
+
 ## [1.1.62](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.61...v1.1.62) (2022-02-10)
 
 
