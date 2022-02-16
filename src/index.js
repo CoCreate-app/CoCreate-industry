@@ -77,7 +77,7 @@ const CoCreateIndustry = {
 };
 
 action.init({
-	action: "runIndustry",
+	name: "runIndustry",
 	endEvent: "runIndustry",
 	callback: (btn, data) => {
 		CoCreateIndustry.runIndustry(btn);
@@ -85,7 +85,7 @@ action.init({
 });
 
 action.init({
-	action: "createIndustry",
+	name: "createIndustry",
 	endEvent: "createdIndustry",
 	callback: (btn, data) => {
 		CoCreateIndustry.createIndustry(btn);
