@@ -1,3 +1,10 @@
+## [1.1.65](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.64...v1.1.65) (2022-02-24)
+
+
+### Bug Fixes
+
+* CoCreate.config replace CoCreate.app with * ([facef6b](https://github.com/CoCreate-app/CoCreate-industry/commit/facef6b1003c12d11064df1b75cd8e22d2410459))
+
 ## [1.1.64](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.63...v1.1.64) (2022-02-16)
 
 
