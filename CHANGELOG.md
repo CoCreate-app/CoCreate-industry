@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.65...v1.2.0) (2022-03-03)
+
+
+### Features
+
+* manage server and client scripts ([8822bb8](https://github.com/CoCreate-app/CoCreate-industry/commit/8822bb88c941acbad20ed0a29e99c7285f28a126))
+
 ## [1.1.65](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.64...v1.1.65) (2022-02-24)
 
 
