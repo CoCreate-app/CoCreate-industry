@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.2.0...v1.3.0) (2022-03-05)
+
+
+### Features
+
+* delete industry document and industries ([d230b1c](https://github.com/CoCreate-app/CoCreate-industry/commit/d230b1ceb9433ae31f7bad1f2fff021a0575eb7a))
+
 # [1.2.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.1.65...v1.2.0) (2022-03-03)
 
 
