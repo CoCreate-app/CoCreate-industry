@@ -61,11 +61,14 @@ const CoCreateIndustry = {
 
 	deleteIndustry: function(btn) {
 		let industry_id = btn.getAttribute('industry_id');
-				
+		if (!industry_id) {
+			let el = btn.clostest('[collection="industry"]')
+			if (el)
+				industry_id = el.getAttribute('document_id')
+			else return;	
+		}
 		const room = config.organization_Id;
-
-		data['organization_id'] = config.organization_Id;
-		
+				
 		crud.send('deleteIndustry', {
 			apiKey: config.apiKey,
 			organization_id: config.organization_Id,

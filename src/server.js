@@ -11,7 +11,7 @@ class CoCreateIndustry {
 		if (this.wsManager) {
 			this.wsManager.on('runIndustry', (socket, data, roomInfo) => this.runIndustry(socket, data));
 			this.wsManager.on('createIndustry',	(socket, data, roomInfo) => this.createIndustry(socket, data));
-			this.wsManager.on('deleteIndustry',	(socket, data, roomInfo) => this.deleteIndustry(socket, data));
+			this.wsManager.on('deleteIndustry',	(socket, data, roomInfo) => this.deleteIndustry(socket, data, roomInfo));
 			this.wsManager.on('fetchInfoForBuilder', (socket, data) => this.fetchInfoForBuilder(socket, data))
 		}
 	}
@@ -286,7 +286,7 @@ class CoCreateIndustry {
 		try {	
 			var collectionList = [];
 			var modules = [];
-			const db = this.dbClient.db(req_data['organization_id']);
+			const db = this.dbClient.db(data['organization_id']);
 			db.listCollections().toArray(function(err, collInfos) {
 				collInfos.forEach(function(colInfo) {
 					collectionList.push(colInfo.name);
@@ -311,37 +311,49 @@ class CoCreateIndustry {
 		}
 	}
 
-	async deleteIndustry(socket, data) {
+	async deleteIndustry(socket, data, roomInfo) {
 		try {
 			const self = this;
-			const db = this.dbClient.db(req_data['organization_id']);
-			const collection = db.collection(req_data["collection"]);
+			const db = this.dbClient.db(data['organization_id']);
+
+			const collection = db.collection("industries");
+			collection.deleteOne({
+				"_id": new ObjectID(data["industry_id"])
+			}, function(error, result) {
+				if (!error) {
+					let response = { ...data }
+					self.broadcast('deleteDocument', socket, data, response, roomInfo)
+				} else {
+					self.wsManager.send(socket, 'ServerError', error, null, roomInfo);
+				}
+			})
+
+			const collection2 = db.collection('industry_documents');
 			const query = {
-				"industry_data": {industry_id: data.industry_id}
+				"industry_data.industry_id": data.industry_id
 			};
-			console.log('deleteIndustry', query)
-			// collection.deleteMany(query, function(error, result) {
-			// 	if (!error) {
-			// 		let response = { ...data }
-			// 		if (data.broadcast_sender != false) {
-			// 			self.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], roomInfo);
-			// 		}
-			// 		if (data.broadcast !== false) {
-			// 			if (data.room) {
-			// 				self.wsManager.broadcast(socket, data.namespace || data['organization_id'], data.room, 'deleteIndustry', response, true, roomInfo);
-			// 			} else {
-			// 				self.wsManager.broadcast(socket, data.namespace || data['organization_id'], null, 'deleteIndustry', response, true, roomInfo)	
-			// 			}
-			// 		}
-			// 		self.processCRUDEvent('deleteIndustry', response);
-			// 	} else {
-			// 		self.wsManager.send(socket, 'ServerError', error, null, roomInfo);
-			// 	}
-			// })
-			// self.wsManager.send(socket, 'deleteIndustry', response, data['organization_id']);
+			collection2.deleteMany(query, function(error, result) {
+				if (!error) {
+					let response = { ...data }
+					self.broadcast('deleteDocument', socket, data, response, roomInfo)
+				} else {
+					self.wsManager.send(socket, 'ServerError', error, null, roomInfo);
+				}
+			})
+			this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], roomInfo);
 		} catch (error) {
 			console.log(error)
 		}
+	}
+
+	broadcast(component, socket, request, response, roomInfo) {
+		if (request.broadcast_sender != false) {
+			this.wsManager.send(socket, component, response, request['organization_id'], roomInfo);
+		}	
+		if (request.broadcast !== false) {
+			this.wsManager.broadcast(socket, request.namespace || request['organization_id'], request.room, component, response, true, roomInfo);
+		}
+		process.emit('changed-document', response)
 	}
 }
 
