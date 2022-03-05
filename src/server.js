@@ -351,7 +351,7 @@ class CoCreateIndustry {
 			this.wsManager.send(socket, component, response, request['organization_id'], roomInfo);
 		}	
 		if (request.broadcast !== false) {
-			this.wsManager.broadcast(socket, request.namespace || request['organization_id'], request.room, component, response, true, roomInfo);
+			this.wsManager.broadcast(socket, request.namespace || request['organization_id'], request.room, component, response, roomInfo);
 		}
 		process.emit('changed-document', response)
 	}
