@@ -1,3 +1,12 @@
+## [1.3.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.0...v1.3.1) (2022-03-06)
+
+
+### Bug Fixes
+
+* broadcast_sender if condition removed and handeled by socket ([a76c0f0](https://github.com/CoCreate-app/CoCreate-industry/commit/a76c0f05640cdc3ea9510214b98bfe67e1ca2a36))
+* removed param isExact from wsManger.broadcast as it can use room ([26ce7ec](https://github.com/CoCreate-app/CoCreate-industry/commit/26ce7ec709614fceb3443f822d8bc9b859827be0))
+* update param roomInfo to socketInfo ([d2fc446](https://github.com/CoCreate-app/CoCreate-industry/commit/d2fc44658b45f665b50a6014c15bfd7811ba2586))
+
 # [1.3.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.2.0...v1.3.0) (2022-03-05)
 
 
