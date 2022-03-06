@@ -9,9 +9,9 @@ class CoCreateIndustry {
 	
 	init() {
 		if (this.wsManager) {
-			this.wsManager.on('runIndustry', (socket, data, roomInfo) => this.runIndustry(socket, data));
-			this.wsManager.on('createIndustry',	(socket, data, roomInfo) => this.createIndustry(socket, data));
-			this.wsManager.on('deleteIndustry',	(socket, data, roomInfo) => this.deleteIndustry(socket, data, roomInfo));
+			this.wsManager.on('runIndustry', (socket, data, socketInfo) => this.runIndustry(socket, data));
+			this.wsManager.on('createIndustry',	(socket, data, socketInfo) => this.createIndustry(socket, data));
+			this.wsManager.on('deleteIndustry',	(socket, data, socketInfo) => this.deleteIndustry(socket, data, socketInfo));
 			this.wsManager.on('fetchInfoForBuilder', (socket, data) => this.fetchInfoForBuilder(socket, data))
 		}
 	}
@@ -311,7 +311,7 @@ class CoCreateIndustry {
 		}
 	}
 
-	async deleteIndustry(socket, data, roomInfo) {
+	async deleteIndustry(socket, data, socketInfo) {
 		try {
 			const self = this;
 			const db = this.dbClient.db(data['organization_id']);
@@ -322,9 +322,9 @@ class CoCreateIndustry {
 			}, function(error, result) {
 				if (!error) {
 					let response = { ...data }
-					self.broadcast('deleteDocument', socket, data, response, roomInfo)
+					self.broadcast('deleteDocument', socket, data, response, socketInfo)
 				} else {
-					self.wsManager.send(socket, 'ServerError', error, null, roomInfo);
+					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
 				}
 			})
 
@@ -335,19 +335,19 @@ class CoCreateIndustry {
 			collection2.deleteMany(query, function(error, result) {
 				if (!error) {
 					let response = { ...data }
-					self.broadcast('deleteDocument', socket, data, response, roomInfo)
+					self.broadcast('deleteDocument', socket, data, response, socketInfo)
 				} else {
-					self.wsManager.send(socket, 'ServerError', error, null, roomInfo);
+					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
 				}
 			})
-			this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], roomInfo);
+			this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], socketInfo);
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
-	broadcast(component, socket, request, response, roomInfo) {
-		this.wsManager.broadcast(socket, request.namespace || request['organization_id'], request.room, component, response, roomInfo);
+	broadcast(component, socket, request, response, socketInfo) {
+		this.wsManager.broadcast(socket, request.namespace || request['organization_id'], request.room, component, response, socketInfo);
 		process.emit('changed-document', response)
 	}
 }
