@@ -62,7 +62,7 @@ const CoCreateIndustry = {
 	deleteIndustry: function(btn) {
 		let industry_id = btn.getAttribute('industry_id');
 		if (!industry_id) {
-			let el = btn.clostest('[collection="industry"]')
+			let el = btn.closest('[collection="industry"]')
 			if (el)
 				industry_id = el.getAttribute('document_id')
 			else return;	
