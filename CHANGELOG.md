@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.2...v1.3.3) (2022-03-07)
+
+
+### Bug Fixes
+
+* typo collection industries ([9f5f9fd](https://github.com/CoCreate-app/CoCreate-industry/commit/9f5f9fdb9cd29986529b153c3fcda2e96a1b688a))
+
 ## [1.3.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.1...v1.3.2) (2022-03-07)
 
 
