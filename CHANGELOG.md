@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.1...v1.3.2) (2022-03-07)
+
+
+### Bug Fixes
+
+* typo clostest to closest ([2944dbb](https://github.com/CoCreate-app/CoCreate-industry/commit/2944dbb2a3cacb093a35a187e1d80786a637934a))
+
 ## [1.3.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.0...v1.3.1) (2022-03-06)
 
 
