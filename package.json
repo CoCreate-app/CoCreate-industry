@@ -65,7 +65,6 @@
     "@cocreate/crud-client": "^1.4.47",
     "@cocreate/docs": "^1.2.69",
     "@cocreate/elements": "^1.6.11",
-    "@cocreate/select": "^1.4.21",
     "mongodb": "^4.4.0"
   }
 }
