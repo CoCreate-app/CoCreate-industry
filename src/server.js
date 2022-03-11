@@ -9,17 +9,197 @@ class CoCreateIndustry {
 	
 	init() {
 		if (this.wsManager) {
-			this.wsManager.on('runIndustry', (socket, data, socketInfo) => this.runIndustry(socket, data));
-			this.wsManager.on('createIndustry',	(socket, data, socketInfo) => this.createIndustry(socket, data));
+			this.wsManager.on('createIndustry',	(socket, data, socketInfo) => this.createIndustry(socket, data, socketInfo));
 			this.wsManager.on('deleteIndustry',	(socket, data, socketInfo) => this.deleteIndustry(socket, data, socketInfo));
-			this.wsManager.on('fetchInfoForBuilder', (socket, data) => this.fetchInfoForBuilder(socket, data))
+			this.wsManager.on('runIndustry', (socket, data, socketInfo) => this.runIndustry(socket, data));
+		}
+	}
+		
+	/**
+	 * Create industry
+	 **/
+	async createIndustry(socket, data, socketInfo) {
+		try {
+			let {organization_id, db, industry_id} = data;
+			const self = this;
+			const collection = this.dbClient.db(organization_id).collection(data.collection);
+			
+			let orgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectID(organization_id)});
+			let subdomain = orgDocument && orgDocument.domains ? orgDocument.domains[0] : "";
+
+			let insertResult;	
+			if (data.industry_id){
+				industry_id = data.industry_id;
+				let update = {};
+				update['$set'] = data.data;
+
+				update.$set['organization_data'] = {
+					subdomain: subdomain,
+					apiKey: orgDocument.apiKey,
+					organization_id: organization_id
+				}
+		
+				update['$set'].organization_id = db || organization_id;
+
+				let projection = {}
+				Object.keys(update['$set']).forEach(x => {
+					projection[x] = 1
+				})
+
+				const query = {"_id": new ObjectID(industry_id) };
+				insertResult = await collection.findOneAndUpdate(query, update, {
+					returnOriginal : false,
+					upsert: true,
+					projection: projection
+				});
+				await this.deleteIndustryDocuments(socket, data, socketInfo)
+				console.log('deleting')
+			}
+			else {
+				let update = data.data;
+				update.organization_data = {
+					subdomain: subdomain,
+					apiKey: orgDocument.apiKey,
+					organization_id: organization_id
+				}
+		
+				update.organization_id = db || organization_id;
+				insertResult = await collection.insertOne(data.data);
+				industry_id = insertResult.ops[0]._id + "";
+			}
+
+			// const industry_id = insertResult.ops[0]._id + "";
+			// const anotherCollection = self.dbClient.db(organization_id).collection(data['collection']);
+			// //. update organization
+			// insertResult.ops[0].organization_id = organization_id;
+			// anotherCollection.insertOne(insertResult.ops[0]);
+			
+			//. create inustryDocuments
+			const srcDB = this.dbClient.db(organization_id);
+			let collections = []
+			const exclusion_collections = ["users", "organizations", "industries", "industry_documents", "crdt-transactions", "metrics"];
+			collections = await srcDB.listCollections().toArray()
+			collections = collections.map(x => x.name)
+
+			for (let i = 0; i < collections.length; i++) {
+				let collection = collections[i];
+				if (exclusion_collections.indexOf(collection) > -1) {
+					continue;
+				}
+				await self.createIndustryDocuments(collection, industry_id, organization_id, db);
+			}
+			
+			//. update subdomain
+			const response  = {
+				'db': data['db'],
+				'collection': data.collection,
+				'document_id': industry_id,
+				'organization_id': organization_id,
+				'industry_id': industry_id,
+				'data': insertResult.ops[0],
+				'metadata': data['metadata'],
+			}
+			self.wsManager.send(socket, 'createIndustry', response, data['organization_id']);
+			self.broadcast('createDocument', socket, response, socketInfo)
+			
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	async createIndustryDocuments(collectionName, industryId, organizationId, targetDB) {
+		try{
+			const industryDocumentsCollection = this.dbClient.db(targetDB).collection('industry_documents');
+			const collection = this.dbClient.db(organizationId).collection(collectionName);
+
+			const  query = {
+				'organization_id': organizationId
+			}
+
+			const documentCursor = collection.find(query);
+			await documentCursor.forEach(async (document) => {
+				var documentId = document['_id'].toString();
+	
+				delete document['_id'];
+				
+				document['industry_data'] = {
+					document_id: documentId,
+					industry_id: industryId,
+					collection: collectionName,
+				}
+
+				industryDocumentsCollection.update(
+					{
+						"industry_data.document_id" : {$eq: documentId},
+						"industry_data.industry_id" : {$eq: industryId},
+						"industry_data.collection"	: {$eq: collectionName},
+					},
+					{ 
+						$set: document
+					},
+					{
+						upsert: true
+					}
+				);
+			})
+		}
+		catch (e) {
+			console.log(e)
 		}
 	}
 	
+	async deleteIndustry(socket, data, socketInfo) {
+		try {
+			const self = this;
+			const db = this.dbClient.db(data['organization_id']);
+
+			const collection = db.collection("industries");
+			collection.deleteOne({
+				"_id": new ObjectID(data["industry_id"])
+			}, function(error, result) {
+				if (!error) {
+					let response = { document_id: data["industry_id"], ...data }
+					self.broadcast('deleteDocument', socket, response, socketInfo)
+				} else {
+					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
+				}
+			})
+
+			await this.deleteIndustryDocuments(socket, data, socketInfo)
+			this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], socketInfo);
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	async deleteIndustryDocuments(socket, data, socketInfo) {
+		try {
+			const self = this;
+			const db = this.dbClient.db(data['organization_id']);
+
+			const collection = db.collection('industry_documents');
+			const query = {
+				"industry_data.industry_id": data.industry_id
+			};
+			// let response;
+			collection.deleteMany(query, function(error, result) {
+				if (!error) {
+					let response = { ...data }
+					self.broadcast('deleteDocument', socket, response, socketInfo)
+				} else {
+					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
+				}
+			})
+			// this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], socketInfo);
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	/**
 	 * Run Industry logic
 	 **/
-	async runIndustry(socket, data) {
+	 async runIndustry(socket, data) {
 		const {industry_id, newOrg_id} = data
 		const db = data.organization_id;
 		let industryDocumentsCollection = this.dbClient.db(db).collection('industry_documents');
@@ -177,177 +357,9 @@ class CoCreateIndustry {
 		}
 		return content
 	}
-	
-	/**
-	 * Create industry
-	 **/
-	async createIndustry(socket, data)
-	{
-		try {
-			const {organization_id, db} = data;
-			const self = this;
-			const collection = this.dbClient.db(organization_id).collection(data.collection);
-			
-			let orgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectID(organization_id)});
-			let subdomain = orgDocument && orgDocument.domains ? orgDocument.domains[0] : "";
-			
-			let insertData = data.data;
-			insertData.organization_data = {
-				subdomain: subdomain,
-				apiKey: orgDocument.apiKey,
-				organization_id: organization_id
-			}
-			//. set masterDB			
-			insertData.organization_id = db || organization_id;
-			let insertResult = await collection.insertOne(insertData);
 
-			const industry_id = insertResult.ops[0]._id + "";
-			// const anotherCollection = self.dbClient.db(organization_id).collection(data['collection']);
-			// //. update organization
-			// insertResult.ops[0].organization_id = organization_id;
-			// anotherCollection.insertOne(insertResult.ops[0]);
-			
-			//. create inustryDocuments
-			const srcDB = this.dbClient.db(organization_id);
-			let collections = []
-			const exclusion_collections = ["users", "organizations", "industries", "industry_documents", "crdt-transactions", "metrics"];
-			collections = await srcDB.listCollections().toArray()
-			collections = collections.map(x => x.name)
-
-			for (let i = 0; i < collections.length; i++) {
-				let collection = collections[i];
-				if (exclusion_collections.indexOf(collection) > -1) {
-					continue;
-				}
-				await self.insertDocumentsToIndustry(collection, industry_id, organization_id, db);
-			}
-			
-			//. update subdomain
-			const response  = {
-				'db': data['db'],
-				'organization_id': organization_id,
-				'industry_id': industry_id,
-				'data': collections,
-				'metadata': data['metadata'],
-			}
-			
-			console.log(response)
-			self.wsManager.send(socket, 'createIndustry', response, data['organization_id']);
-
-			
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
-	async insertDocumentsToIndustry(collectionName, industryId, organizationId, targetDB) {
-		try{
-			const industryDocumentsCollection = this.dbClient.db(targetDB).collection('industry_documents');
-			const collection = this.dbClient.db(organizationId).collection(collectionName);
-
-			const  query = {
-				'organization_id': organizationId
-			}
-
-			const documentCursor = collection.find(query);
-			await documentCursor.forEach(async (document) => {
-				var documentId = document['_id'].toString();
-	
-				delete document['_id'];
-				
-				document['industry_data'] = {
-					document_id: documentId,
-					industry_id: industryId,
-					collection: collectionName,
-				}
-
-				industryDocumentsCollection.update(
-					{
-						"industry_data.document_id" : {$eq: documentId},
-						"industry_data.industry_id" : {$eq: industryId},
-						"industry_data.collection"	: {$eq: collectionName},
-					},
-					{ 
-						$set: document
-					},
-					{
-						upsert: true
-					}
-				);
-			})
-		}
-		catch (e) {
-			console.log(e)
-		}
-	}
-	
-	//. builder
-	async fetchInfoForBuilder(socket, data) {		
-		try {	
-			var collectionList = [];
-			var modules = [];
-			const db = this.dbClient.db(data['organization_id']);
-			db.listCollections().toArray(function(err, collInfos) {
-				collInfos.forEach(function(colInfo) {
-					collectionList.push(colInfo.name);
-				})
-				const collection = db.collection('modules');
-				modulesCollection.find().toArray(function(error, result) {
-					result.forEach(function(item) {
-						modules.push({
-							_id: item['_id'],
-							name: item['name']
-						})
-					})
-					
-					self.wsManager.send(socket, 'fetchedInfoForBuilder', {
-						collections: collectionList,
-						modules: modules
-					}, data['organization_id']);
-				})
-			});
-		} catch (error) {
-			console.log('fetchInfoBuilder error');
-		}
-	}
-
-	async deleteIndustry(socket, data, socketInfo) {
-		try {
-			const self = this;
-			const db = this.dbClient.db(data['organization_id']);
-
-			const collection = db.collection("industries");
-			collection.deleteOne({
-				"_id": new ObjectID(data["industry_id"])
-			}, function(error, result) {
-				if (!error) {
-					let response = { ...data }
-					self.broadcast('deleteDocument', socket, data, response, socketInfo)
-				} else {
-					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
-				}
-			})
-
-			const collection2 = db.collection('industry_documents');
-			const query = {
-				"industry_data.industry_id": data.industry_id
-			};
-			collection2.deleteMany(query, function(error, result) {
-				if (!error) {
-					let response = { ...data }
-					self.broadcast('deleteDocument', socket, data, response, socketInfo)
-				} else {
-					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
-				}
-			})
-			this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], socketInfo);
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
-	broadcast(component, socket, request, response, socketInfo) {
-		this.wsManager.broadcast(socket, request.namespace || request['organization_id'], request.room, component, response, socketInfo);
+	broadcast(component, socket, response, socketInfo) {
+		this.wsManager.broadcast(socket, response.namespace || response['organization_id'], response.room, component, response, socketInfo);
 		process.emit('changed-document', response)
 	}
 }

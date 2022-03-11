@@ -44,7 +44,14 @@ const CoCreateIndustry = {
 			}
 			data[name] = value;
 		});
-		
+
+		let industry_id = btn.getAttribute('industry_id');
+		if (!industry_id) {
+			let el = btn.closest('[collection="industries"]')
+			if (el)
+				industry_id = el.getAttribute('document_id')
+		}
+		console.log('industry_id', industry_id)
 		const room = config.organization_Id;
 
 		data['organization_id'] = config.organization_Id;
@@ -55,6 +62,7 @@ const CoCreateIndustry = {
 			organization_id: config.organization_Id,
 			db: config.organization_Id,
 			collection: 'industries',
+			industry_id,
 			data: data
 		}, room);
 	},
