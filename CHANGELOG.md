@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.0...v1.4.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* removed @cocreate/select ([07e1dc3](https://github.com/CoCreate-app/CoCreate-industry/commit/07e1dc3bca33df1256964bf5045a278cd80a7478))
+
 # [1.4.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.3...v1.4.0) (2022-03-11)
 
 
