@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.3...v1.4.0) (2022-03-11)
+
+
+### Features
+
+* broadcast createdDocument and deletedDocument ([07d225a](https://github.com/CoCreate-app/CoCreate-industry/commit/07d225a3770a6effe317b55aabb0953db6c4fd05))
+
 ## [1.3.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.3.2...v1.3.3) (2022-03-07)
 
 
