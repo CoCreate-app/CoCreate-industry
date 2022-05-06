@@ -1,4 +1,4 @@
-const { ObjectID } = require("mongodb");
+const { ObjectId } = require("mongodb");
 
 class CoCreateIndustry {
 	constructor(wsManager, dbClient) {
@@ -24,7 +24,7 @@ class CoCreateIndustry {
 			const self = this;
 			const collection = this.dbClient.db(organization_id).collection(data.collection);
 			
-			let orgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectID(organization_id)});
+			let orgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectId(organization_id)});
 			let subdomain = orgDocument && orgDocument.domains ? orgDocument.domains[0] : "";
 
 			let insertResult;	
@@ -46,7 +46,7 @@ class CoCreateIndustry {
 					projection[x] = 1
 				})
 
-				const query = {"_id": new ObjectID(industry_id) };
+				const query = {"_id": new ObjectId(industry_id) };
 				insertResult = await collection.findOneAndUpdate(query, update, {
 					returnOriginal : false,
 					upsert: true,
@@ -65,15 +65,9 @@ class CoCreateIndustry {
 		
 				update.organization_id = db || organization_id;
 				insertResult = await collection.insertOne(data.data);
-				industry_id = insertResult.ops[0]._id + "";
+				industry_id = `${insertResult.insertedId}`;
 			}
 
-			// const industry_id = insertResult.ops[0]._id + "";
-			// const anotherCollection = self.dbClient.db(organization_id).collection(data['collection']);
-			// //. update organization
-			// insertResult.ops[0].organization_id = organization_id;
-			// anotherCollection.insertOne(insertResult.ops[0]);
-			
 			//. create inustryDocuments
 			const srcDB = this.dbClient.db(organization_id);
 			let collections = []
@@ -96,7 +90,7 @@ class CoCreateIndustry {
 				'document_id': industry_id,
 				'organization_id': organization_id,
 				'industry_id': industry_id,
-				'data': insertResult.ops[0],
+				'data': data.data,
 				'metadata': data['metadata'],
 			}
 			self.wsManager.send(socket, 'createIndustry', response, data['organization_id']);
@@ -155,7 +149,7 @@ class CoCreateIndustry {
 
 			const collection = db.collection("industries");
 			collection.deleteOne({
-				"_id": new ObjectID(data["industry_id"])
+				"_id": new ObjectId(data["industry_id"])
 			}, function(error, result) {
 				if (!error) {
 					let response = { document_id: data["industry_id"], ...data }
@@ -205,13 +199,13 @@ class CoCreateIndustry {
 		let industryDocumentsCollection = this.dbClient.db(db).collection('industry_documents');
 
 
-		let industry = await this.dbClient.db(db).collection('industries').findOne({_id: ObjectID(industry_id)});
+		let industry = await this.dbClient.db(db).collection('industries').findOne({_id: ObjectId(industry_id)});
 		let error = null;
 
 		if (!industry._id) {
 			error = "Can't get industry"
 		} else {
-			let newOrgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectID(newOrg_id)});
+			let newOrgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectId(newOrg_id)});
 			
 			if (!newOrgDocument) {
 				error = "Can't get organization";
@@ -322,7 +316,7 @@ class CoCreateIndustry {
 			const {collection_name, new_id} = idPairs[i];
 			const collection = newDB.collection(collection_name);
 			
-			let document = await collection.findOne({'_id': ObjectID(new_id)});
+			let document = await collection.findOne({'_id': ObjectId(new_id)});
 			
 			for (let field in document) {
 				if (field != '_id' && field != 'organization_id') {
@@ -332,7 +326,7 @@ class CoCreateIndustry {
 			}
 			
 			delete document['_id'];
-			await collection.findOneAndUpdate({'_id': ObjectID(new_id)}, {$set: document});
+			await collection.findOneAndUpdate({'_id': ObjectId(new_id)}, {$set: document});
 		}
 	}
 	

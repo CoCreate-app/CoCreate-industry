@@ -4,7 +4,6 @@ import action from '@cocreate/actions';
 // 
 // const config = window.config;
 const CoCreateIndustry = {
-	// masterDB: '5ae0cfac6fb8c4e656fdaf92', // '5ae0cfac6fb8c4e656fdaf92' /** masterDB **/,
 	init: function() {
 		
 		crud.listen('createIndustry', function(data) {
