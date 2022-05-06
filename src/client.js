@@ -51,15 +51,15 @@ const CoCreateIndustry = {
 				industry_id = el.getAttribute('document_id')
 		}
 		console.log('industry_id', industry_id)
-		const room = config.organization_Id;
+		const room = config.organization_id;
 
-		data['organization_id'] = config.organization_Id;
+		data['organization_id'] = config.organization_id;
 		
 		// return;
 		crud.send('createIndustry', {
 			apiKey: config.apiKey,
-			organization_id: config.organization_Id,
-			db: config.organization_Id,
+			organization_id: config.organization_id,
+			db: config.organization_id,
 			collection: 'industries',
 			industry_id,
 			data: data
@@ -74,11 +74,11 @@ const CoCreateIndustry = {
 				industry_id = el.getAttribute('document_id')
 			else return;	
 		}
-		const room = config.organization_Id;
+		const room = config.organization_id;
 				
 		crud.send('deleteIndustry', {
 			apiKey: config.apiKey,
-			organization_id: config.organization_Id,
+			organization_id: config.organization_id,
 			collection: 'industries',
 			industry_id: industry_id,
 		}, room);
@@ -96,10 +96,10 @@ const CoCreateIndustry = {
 			if (industry_id && newOrgId) {
 				crud.send('runIndustry', {
 					apiKey: config.apiKey,
-					organization_id: config.organization_Id,
+					organization_id: config.organization_id,
 					industry_id: industry_id,
 					newOrg_id: newOrgId,
-					// db: config.organization_Id
+					// db: config.organization_id
 				});
 			}
 			
