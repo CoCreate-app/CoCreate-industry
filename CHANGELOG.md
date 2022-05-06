@@ -1,3 +1,11 @@
+## [1.4.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.1...v1.4.2) (2022-05-06)
+
+
+### Bug Fixes
+
+* replace ObjectID with ObjectId due to mongodb depreciation ([29f5fae](https://github.com/CoCreate-app/CoCreate-industry/commit/29f5fae405eb0b25c67727f335d895b52e2129b3))
+* update config organization_Id to organization_id ([bb12e89](https://github.com/CoCreate-app/CoCreate-industry/commit/bb12e8942e17b4a91f120312368a0fed151833c1))
+
 ## [1.4.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.0...v1.4.1) (2022-03-11)
 
 
