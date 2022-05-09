@@ -212,7 +212,7 @@ class CoCreateIndustry {
 			} else {
 				let new_subdomain = newOrgDocument && newOrgDocument.domains ? newOrgDocument.domains[0] : "";
 				
-				const {adminUI_id, builderUI_id, idPairs} = await this.createEmptyDocumentsFromIndustry
+				const {idPairs} = await this.createEmptyDocumentsFromIndustry
 				(
 					industryDocumentsCollection, 
 					industry_id, 
@@ -224,8 +224,6 @@ class CoCreateIndustry {
 				this.wsManager.send(socket, 'runIndustry', {
 					error: false,
 					message: "successfuly",
-					adminUI_id,
-					builderUI_id,
 					industry_id
 				}, data['organization_id'])
 				return;
@@ -249,8 +247,6 @@ class CoCreateIndustry {
 		
 		const newDB = this.dbClient.db(newOrgId);
 		const self = this;
-		let adminUI_id = '';
-		let builderUI_id = '';
 		let idPairs = [];
 		
 		let documentCursor = industryDocumentsCollection.find({"industry_data.industry_id" : industry_id})
@@ -286,14 +282,8 @@ class CoCreateIndustry {
 
 			let newDocument = await collectionInstance.insertOne(document);
 			if (newDocument) {
-				if (newDocument['ops'][0].name == 'Admin UI') {
-					adminUI_id = newDocument['ops'][0]['_id'];
-				} else if (newDocument['ops'][0].name == 'Builder UI') {
-					builderUI_id = newDocument['ops'][0]['_id'];
-				}
-				
 				idPairs.push({
-					new_id : newDocument['ops'][0]['_id'].toString(),
+					new_id : `${newDocument.insertedId}`,
 					old_id : document_id,
 					collection_name: collection
 				})
@@ -303,8 +293,6 @@ class CoCreateIndustry {
 		// console.log(idPairs.length);
 		
 		return {
-			adminUI_id: adminUI_id,
-			builderUI_id: builderUI_id,
 			idPairs: idPairs
 		}
 	}
