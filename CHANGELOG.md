@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.2...v1.4.3) (2022-05-09)
+
+
+### Bug Fixes
+
+* insert returns insertedId instead of [0]._id and remove adminUI_id and builderUI_id ([28832ec](https://github.com/CoCreate-app/CoCreate-industry/commit/28832ec96a27fd62b25c36bb5c024f4d921072a7))
+
 ## [1.4.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.1...v1.4.2) (2022-05-06)
 
 
