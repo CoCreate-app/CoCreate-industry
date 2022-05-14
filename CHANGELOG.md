@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.3...v1.5.0) (2022-05-14)
+
+
+### Features
+
+* function readDocumentList has been renamed to readDocuments ([18e4853](https://github.com/CoCreate-app/CoCreate-industry/commit/18e485300e6597ceb3040706ebbe96b5bea36318))
+
 ## [1.4.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.2...v1.4.3) (2022-05-09)
 
 
