@@ -11,7 +11,7 @@ class CoCreateIndustry {
 		if (this.wsManager) {
 			this.wsManager.on('createIndustry',	(socket, data, socketInfo) => this.createIndustry(socket, data, socketInfo));
 			this.wsManager.on('deleteIndustry',	(socket, data, socketInfo) => this.deleteIndustry(socket, data, socketInfo));
-			this.wsManager.on('runIndustry', (socket, data, socketInfo) => this.runIndustry(socket, data));
+			this.wsManager.on('runIndustry', (socket, data, socketInfo) => this.runIndustry(socket, data, socketInfo));
 		}
 	}
 		
@@ -93,7 +93,7 @@ class CoCreateIndustry {
 				'data': data.data,
 				'metadata': data['metadata'],
 			}
-			self.wsManager.send(socket, 'createIndustry', response, data['organization_id']);
+			self.wsManager.send(socket, 'createIndustry', response, socketInfo);
 			self.broadcast('createDocument', socket, response, socketInfo)
 			
 		} catch (error) {
@@ -155,12 +155,12 @@ class CoCreateIndustry {
 					let response = { document_id: data["industry_id"], ...data }
 					self.broadcast('deleteDocument', socket, response, socketInfo)
 				} else {
-					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
+					self.wsManager.send(socket, 'ServerError', error, socketInfo);
 				}
 			})
 
 			await this.deleteIndustryDocuments(socket, data, socketInfo)
-			this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], socketInfo);
+			this.wsManager.send(socket, 'deleteIndustry', { ...response}, socketInfo);
 		} catch (error) {
 			console.log(error)
 		}
@@ -181,10 +181,10 @@ class CoCreateIndustry {
 					let response = { ...data }
 					self.broadcast('deleteDocument', socket, response, socketInfo)
 				} else {
-					self.wsManager.send(socket, 'ServerError', error, null, socketInfo);
+					self.wsManager.send(socket, 'ServerError', error, socketInfo);
 				}
 			})
-			// this.wsManager.send(socket, 'deleteIndustry', { ...response}, data['organization_id'], socketInfo);
+			// this.wsManager.send(socket, 'deleteIndustry', { ...response}, socketInfo);
 		} catch (error) {
 			console.log(error)
 		}
@@ -193,7 +193,7 @@ class CoCreateIndustry {
 	/**
 	 * Run Industry logic
 	 **/
-	 async runIndustry(socket, data) {
+	 async runIndustry(socket, data, socketInfo) {
 		const {industry_id, newOrg_id} = data
 		const db = data.organization_id;
 		let industryDocumentsCollection = this.dbClient.db(db).collection('industry_documents');
@@ -225,7 +225,7 @@ class CoCreateIndustry {
 					error: false,
 					message: "successfuly",
 					industry_id
-				}, data['organization_id'])
+				}, socketInfo)
 				return;
 			}
 		}
@@ -233,7 +233,7 @@ class CoCreateIndustry {
 			this.wsManager.send(socket, 'runIndustry', {
 				error: true,
 				message: error,
-			}, data['organization_id'])
+			}, socketInfo)
 		}
 
 
