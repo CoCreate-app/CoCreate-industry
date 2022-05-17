@@ -1,3 +1,11 @@
+## [1.5.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.5.0...v1.5.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* get orgId from socketInfo ([029d10f](https://github.com/CoCreate-app/CoCreate-industry/commit/029d10f9c8e374fb4a07841c937306acac1eeb16))
+* update document_id on link index.css ([02a3508](https://github.com/CoCreate-app/CoCreate-industry/commit/02a35089fead9250a05d5076fb133fdb472a7fd6))
+
 # [1.5.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.4.3...v1.5.0) (2022-05-14)
 
 
