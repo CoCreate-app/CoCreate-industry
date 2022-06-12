@@ -1,3 +1,11 @@
+## [1.5.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.5.2...v1.5.3) (2022-06-12)
+
+
+### Bug Fixes
+
+* update dependencies ([4d4e30c](https://github.com/CoCreate-app/CoCreate-industry/commit/4d4e30ccb1c27d2d7b5f470f1aa07b5dd0e2569d))
+* update docs css document_id ([545238f](https://github.com/CoCreate-app/CoCreate-industry/commit/545238f2f4dd07abbe6cd796c193f60e615bfac4))
+
 ## [1.5.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.5.1...v1.5.2) (2022-05-23)
 
 
