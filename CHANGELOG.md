@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.5.4...v1.6.0) (2022-06-24)
+
+
+### Features
+
+* deleteIndustries action for datatable ([3b50917](https://github.com/CoCreate-app/CoCreate-industry/commit/3b509176bf72d81c11e9640a76265f045c746edf))
+
 ## [1.5.4](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.5.3...v1.5.4) (2022-06-18)
 
 
