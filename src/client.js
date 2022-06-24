@@ -82,7 +82,37 @@ const CoCreateIndustry = {
 			collection: 'industries',
 			industry_id: industry_id,
 		}, room);
+
+		document.dispatchEvent(new CustomEvent('deletedIndustry', {
+			detail: {}
+		}));
 	},
+
+	deleteIndustries: function(btn) {
+		const dataTemplateid = btn.getAttribute('template_id');
+		if(!dataTemplateid) return;
+
+		const selectedEls = document.querySelectorAll(`.selected[templateid="${dataTemplateid}"]`);
+
+		selectedEls.forEach((el) => {
+			let industry_id = el.getAttribute('document_id');
+
+			if(crud.checkAttrValue(industry_id)) {
+				const room = config.organization_id;
+				crud.send('deleteIndustry', {
+					apiKey: config.apiKey,
+					organization_id: config.organization_id,
+					collection: 'industries',
+					industry_id: industry_id,
+				}, room);
+			}
+		});
+
+		document.dispatchEvent(new CustomEvent('deletedIndustries', {
+			detail: {}
+		}));
+	},
+
 	
 	runIndustry: function(btn) {
 		const form = btn.closest('form');
@@ -125,9 +155,17 @@ action.init({
 
 action.init({
 	name: "deleteIndustry",
-	endEvent: "deleteIndustry",
+	endEvent: "deletedIndustry",
 	callback: (btn, data) => {
 		CoCreateIndustry.deleteIndustry(btn);
+	},
+});
+
+action.init({
+	name: "deleteIndustries",
+	endEvent: "deletedIndustries",
+	callback: (btn, data) => {
+		CoCreateIndustry.deleteIndustries(btn);
 	},
 });
 
