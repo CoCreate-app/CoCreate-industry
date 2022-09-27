@@ -9,16 +9,16 @@ class CoCreateIndustry {
 	
 	init() {
 		if (this.wsManager) {
-			this.wsManager.on('createIndustry',	(socket, data, socketInfo) => this.createIndustry(socket, data, socketInfo));
-			this.wsManager.on('deleteIndustry',	(socket, data, socketInfo) => this.deleteIndustry(socket, data, socketInfo));
-			this.wsManager.on('runIndustry', (socket, data, socketInfo) => this.runIndustry(socket, data, socketInfo));
+			this.wsManager.on('createIndustry',	(socket, data) => this.createIndustry(socket, data));
+			this.wsManager.on('deleteIndustry',	(socket, data) => this.deleteIndustry(socket, data));
+			this.wsManager.on('runIndustry', (socket, data) => this.runIndustry(socket, data));
 		}
 	}
 		
 	/**
 	 * Create industry
 	 **/
-	async createIndustry(socket, data, socketInfo) {
+	async createIndustry(socket, data) {
 		try {
 			let {organization_id, db, industry_id} = data;
 			const self = this;
@@ -52,7 +52,7 @@ class CoCreateIndustry {
 					upsert: true,
 					projection: projection
 				});
-				await this.deleteIndustryDocuments(socket, data, socketInfo)
+				await this.deleteIndustryDocuments(socket, data)
 				console.log('deleting')
 			}
 			else {
@@ -93,8 +93,8 @@ class CoCreateIndustry {
 				'data': data.data,
 				'metadata': data['metadata'],
 			}
-			self.wsManager.send(socket, 'createIndustry', response, socketInfo);
-			self.broadcast('createDocument', socket, response, socketInfo)
+			self.wsManager.send(socket, 'createIndustry', response);
+			self.broadcast('createDocument', socket, response)
 			
 		} catch (error) {
 			console.log(error)
@@ -142,7 +142,7 @@ class CoCreateIndustry {
 		}
 	}
 	
-	async deleteIndustry(socket, data, socketInfo) {
+	async deleteIndustry(socket, data) {
 		try {
 			const self = this;
 			const db = this.dbClient.db(data['organization_id']);
@@ -153,20 +153,20 @@ class CoCreateIndustry {
 			}, function(error, result) {
 				if (!error) {
 					let response = { document_id: data["industry_id"], ...data }
-					self.broadcast('deleteDocument', socket, response, socketInfo)
+					self.broadcast('deleteDocument', socket, response)
 				} else {
-					self.wsManager.send(socket, 'ServerError', error, socketInfo);
+					self.wsManager.send(socket, 'ServerError', error);
 				}
 			})
 
-			await this.deleteIndustryDocuments(socket, data, socketInfo)
-			this.wsManager.send(socket, 'deleteIndustry', { ...response}, socketInfo);
+			await this.deleteIndustryDocuments(socket, data)
+			this.wsManager.send(socket, 'deleteIndustry', { ...response});
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
-	async deleteIndustryDocuments(socket, data, socketInfo) {
+	async deleteIndustryDocuments(socket, data) {
 		try {
 			const self = this;
 			const db = this.dbClient.db(data['organization_id']);
@@ -179,12 +179,12 @@ class CoCreateIndustry {
 			collection.deleteMany(query, function(error, result) {
 				if (!error) {
 					let response = { ...data }
-					self.broadcast('deleteDocument', socket, response, socketInfo)
+					self.broadcast('deleteDocument', socket, response)
 				} else {
-					self.wsManager.send(socket, 'ServerError', error, socketInfo);
+					self.wsManager.send(socket, 'ServerError', error);
 				}
 			})
-			// this.wsManager.send(socket, 'deleteIndustry', { ...response}, socketInfo);
+			// this.wsManager.send(socket, 'deleteIndustry', { ...response});
 		} catch (error) {
 			console.log(error)
 		}
@@ -193,7 +193,7 @@ class CoCreateIndustry {
 	/**
 	 * Run Industry logic
 	 **/
-	 async runIndustry(socket, data, socketInfo) {
+	 async runIndustry(socket, data) {
 		const {industry_id, newOrg_id} = data
 		const db = data.organization_id;
 		let industryDocumentsCollection = this.dbClient.db(db).collection('industry_documents');
@@ -225,7 +225,7 @@ class CoCreateIndustry {
 					error: false,
 					message: "successfuly",
 					industry_id
-				}, socketInfo)
+				})
 				return;
 			}
 		}
@@ -233,7 +233,7 @@ class CoCreateIndustry {
 			this.wsManager.send(socket, 'runIndustry', {
 				error: true,
 				message: error,
-			}, socketInfo)
+			})
 		}
 
 
@@ -340,8 +340,8 @@ class CoCreateIndustry {
 		return content
 	}
 
-	broadcast(component, socket, response, socketInfo) {
-		this.wsManager.broadcast(socket, response.namespace || response['organization_id'], response.room, component, response, socketInfo);
+	broadcast(component, socket, response) {
+		this.wsManager.broadcast(socket, response.namespace || response['organization_id'], response.room, component, response);
 		process.emit('changed-document', response)
 	}
 }

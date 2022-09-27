@@ -2,7 +2,6 @@ import crud from '@cocreate/crud-client';
 // import input from '@cocreate/elements';
 import action from '@cocreate/actions';
 // 
-// const config = window.config;
 const CoCreateIndustry = {
 	init: function() {
 		
