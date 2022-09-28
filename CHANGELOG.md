@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.6.2...v1.7.0) (2022-09-28)
+
+
+### Bug Fixes
+
+* broadcast params reduced to socket, message, data ([1c0aaca](https://github.com/CoCreate-app/CoCreate-industry/commit/1c0aaca03c261d8948bd5b69d6f9729fd137d2d2))
+
+
+### Features
+
+* config accessible from socket.config ([51a0ce7](https://github.com/CoCreate-app/CoCreate-industry/commit/51a0ce7cc4baa9db39087e4e96b47b17846657ba))
+
 ## [1.6.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.6.1...v1.6.2) (2022-09-01)
 
 
