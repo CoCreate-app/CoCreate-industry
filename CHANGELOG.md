@@ -1,3 +1,10 @@
+## [1.7.9](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.7.8...v1.7.9) (2022-10-02)
+
+
+### Bug Fixes
+
+* bump @cocreate/hosting and @cocreate/socket-client ([23dc47f](https://github.com/CoCreate-app/CoCreate-industry/commit/23dc47f1e94c105309509181ef0c8a54dcd03242))
+
 ## [1.7.8](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.7.7...v1.7.8) (2022-10-01)
 
 
