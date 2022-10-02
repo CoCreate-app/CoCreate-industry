@@ -1,3 +1,10 @@
+## [1.7.11](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.7.10...v1.7.11) (2022-10-02)
+
+
+### Bug Fixes
+
+* bump dependencies ([b42ea78](https://github.com/CoCreate-app/CoCreate-industry/commit/b42ea78dcdf6f8dd91b06010e25317860ba2320e))
+
 ## [1.7.10](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.7.9...v1.7.10) (2022-10-02)
 
 
