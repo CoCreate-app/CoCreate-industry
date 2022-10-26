@@ -1,7 +1,14 @@
-import crud from '@cocreate/crud-client';
+import CRUD from '@cocreate/crud-client';
 // import input from '@cocreate/elements';
 import action from '@cocreate/actions';
 // 
+
+let crud
+if(CRUD && CRUD.default)
+	crud = CRUD.default
+else
+	crud = CRUD
+
 const CoCreateIndustry = {
 	init: function() {
 		
