@@ -61,7 +61,7 @@ const CoCreateIndustry = {
 		data['organization_id'] = config.organization_id;
 		
 		// return;
-		crud.send('createIndustry', {
+		crud.socket.send('createIndustry', {
 			apiKey: config.apiKey,
 			organization_id: config.organization_id,
 			db: config.organization_id,
@@ -81,7 +81,7 @@ const CoCreateIndustry = {
 		}
 		const room = config.organization_id;
 				
-		crud.send('deleteIndustry', {
+		crud.socket.send('deleteIndustry', {
 			apiKey: config.apiKey,
 			organization_id: config.organization_id,
 			collection: 'industries',
@@ -104,7 +104,7 @@ const CoCreateIndustry = {
 
 			if(crud.checkAttrValue(industry_id)) {
 				const room = config.organization_id;
-				crud.send('deleteIndustry', {
+				crud.socket.send('deleteIndustry', {
 					apiKey: config.apiKey,
 					organization_id: config.organization_id,
 					collection: 'industries',
@@ -129,9 +129,10 @@ const CoCreateIndustry = {
 			const newOrgId = industrySelect.getAttribute('document_id');
 			
 			if (industry_id && newOrgId) {
-				crud.send('runIndustry', {
-					apiKey: config.apiKey,
-					organization_id: config.organization_id,
+				console.log('config', CoCreateConfig)
+				crud.socket.send('runIndustry', {
+					apiKey: crud.socket.config.apiKey,
+					organization_id: crud.socket.config.organization_id,
 					industry_id: industry_id,
 					newOrg_id: newOrgId,
 					// db: config.organization_id

@@ -1,9 +1,7 @@
-const { ObjectId } = require("mongodb");
-
 class CoCreateIndustry {
-	constructor(wsManager, dbClient) {
+	constructor(wsManager, crud) {
 		this.wsManager = wsManager
-		this.dbClient = dbClient
+		this.crud = crud
 		this.init()
 	}
 	
@@ -14,7 +12,8 @@ class CoCreateIndustry {
 			this.wsManager.on('runIndustry', (socket, data) => this.runIndustry(socket, data));
 		}
 	}
-		
+	
+	// ToDo: perform action on primary db only and improve params names
 	/**
 	 * Create industry
 	 **/
@@ -22,61 +21,49 @@ class CoCreateIndustry {
 		try {
 			let {organization_id, db, industry_id} = data;
 			const self = this;
-			const collection = this.dbClient.db(organization_id).collection(data.collection);
+
+			let orgDocument = await this.crud.readDocument({
+				database: organization_id, 
+				collection: data.collection,
+				document: {_id: organization_id},
+				organization_id
+			})
 			
-			let orgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectId(organization_id)});
+			orgDocument = orgDocument.document[0]
+
 			let subdomain = orgDocument && orgDocument.domains ? orgDocument.domains[0] : "";
+			let update = {
+				database: organization_id, 
+				collection: data.collection,
+				document: {
+					...data.data,
+					organization_data: {
+						subdomain,
+						organization_id,
+						apiKey: orgDocument.apiKey
+					}
+				},
+				organization_id
+			}
 
 			let insertResult;	
-			if (data.industry_id){
-				industry_id = data.industry_id;
-				let update = {};
-				update['$set'] = data.data;
+			if (industry_id) {
+				update.document._id = industry_id
+				insertResult = await this.crud.updateDocument(update)
 
-				update.$set['organization_data'] = {
-					subdomain: subdomain,
-					apiKey: orgDocument.apiKey,
-					organization_id: organization_id
-				}
-		
-				update['$set'].organization_id = db || organization_id;
-
-				let projection = {}
-				Object.keys(update['$set']).forEach(x => {
-					projection[x] = 1
-				})
-
-				const query = {"_id": new ObjectId(industry_id) };
-				insertResult = await collection.findOneAndUpdate(query, update, {
-					returnOriginal : false,
-					upsert: true,
-					projection: projection
-				});
 				await this.deleteIndustryDocuments(socket, data)
 				console.log('deleting')
-			}
-			else {
-				let update = data.data;
-				update.organization_data = {
-					subdomain: subdomain,
-					apiKey: orgDocument.apiKey,
-					organization_id: organization_id
-				}
-		
-				update.organization_id = db || organization_id;
-				insertResult = await collection.insertOne(data.data);
-				industry_id = `${insertResult.insertedId}`;
+			} else {
+				insertResult = await this.crud.createDocument(update);
+				industry_id = `${insertResult.document._id}`;
 			}
 
 			//. create inustryDocuments
-			const srcDB = this.dbClient.db(organization_id);
-			let collections = []
 			const exclusion_collections = ["users", "organizations", "industries", "industry_documents", "crdt-transactions", "metrics"];
-			collections = await srcDB.listCollections().toArray()
-			collections = collections.map(x => x.name)
+			let collections = await crud.readCollection({database: organization_id, organization_id})
 
 			for (let i = 0; i < collections.length; i++) {
-				let collection = collections[i];
+				let collection = collections[i].name;
 				if (exclusion_collections.indexOf(collection) > -1) {
 					continue;
 				}
@@ -93,6 +80,7 @@ class CoCreateIndustry {
 				'data': data.data,
 				'metadata': data['metadata'],
 			}
+
 			self.wsManager.send(socket, 'createIndustry', response);
 			self.broadcast('createDocument', socket, response)
 			
@@ -103,39 +91,45 @@ class CoCreateIndustry {
 
 	async createIndustryDocuments(collectionName, industryId, organizationId, targetDB) {
 		try{
-			const industryDocumentsCollection = this.dbClient.db(targetDB).collection('industry_documents');
-			const collection = this.dbClient.db(organizationId).collection(collectionName);
-
-			const  query = {
-				'organization_id': organizationId
+			const query = {
+				database: organizationId,
+				collection: collectionName,
+				organization_id: organizationId
 			}
 
-			const documentCursor = collection.find(query);
-			await documentCursor.forEach(async (document) => {
-				var documentId = document['_id'].toString();
+			// ToDo: support for opening cursor with crud?
+			// const documentCursor = collection.find(query);
+			// await documentCursor.forEach(async (document) => {
+
+			const documents = this.crud.readDocument(query);
+			for (let document of documents.document) {
+				let documentId = document['_id'].toString();
 	
 				delete document['_id'];
 				
-				document['industry_data'] = {
-					document_id: documentId,
-					industry_id: industryId,
-					collection: collectionName,
+				let Data = {
+					database: targetDB,
+					collection: 'industry_documents',
+					document: {
+						industry_data: {
+							document_id: documentId,
+							industry_id: industryId,
+							collection: collectionName
+						}
+					},
+					filter: {
+						query: [
+							{name: "industry_data.document_id", value: documentId, operator: '$eq'},
+							{name: "industry_data.industry_id", value: industryId, operator: '$eq'},
+							{name: "industry_data.collection", value: collectionName, operator: '$eq'}
+						]
+					},
+					organization_id: organizationId,
+					upsert: true
 				}
-
-				industryDocumentsCollection.update(
-					{
-						"industry_data.document_id" : {$eq: documentId},
-						"industry_data.industry_id" : {$eq: industryId},
-						"industry_data.collection"	: {$eq: collectionName},
-					},
-					{ 
-						$set: document
-					},
-					{
-						upsert: true
-					}
-				);
-			})
+				
+				this.crud.updateDocument(Data)
+			}
 		}
 		catch (e) {
 			console.log(e)
@@ -145,18 +139,9 @@ class CoCreateIndustry {
 	async deleteIndustry(socket, data) {
 		try {
 			const self = this;
-			const db = this.dbClient.db(data['organization_id']);
-
-			const collection = db.collection("industries");
-			collection.deleteOne({
-				"_id": new ObjectId(data["industry_id"])
-			}, function(error, result) {
-				if (!error) {
-					let response = { document_id: data["industry_id"], ...data }
-					self.broadcast('deleteDocument', socket, response)
-				} else {
-					self.wsManager.send(socket, 'ServerError', error);
-				}
+			this.crud.deleteDocument({...data, collection: 'industries', document: {_id: data["industry_id"]}}).then((data) => {
+				let response = { document_id: data["industry_id"], ...data }
+				self.broadcast('deleteDocument', socket, response)
 			})
 
 			await this.deleteIndustryDocuments(socket, data)
@@ -169,22 +154,19 @@ class CoCreateIndustry {
 	async deleteIndustryDocuments(socket, data) {
 		try {
 			const self = this;
-			const db = this.dbClient.db(data['organization_id']);
+			let Data = {
+				collection: 'industry_documents',
+				filter: {
+					query: [
+						{name: "industry_data.industry_id", value: data.industry_id, operator: '$eq'},
+					]
+				},
+				organization_id: data['organization_id']
+			}
 
-			const collection = db.collection('industry_documents');
-			const query = {
-				"industry_data.industry_id": data.industry_id
-			};
-			// let response;
-			collection.deleteMany(query, function(error, result) {
-				if (!error) {
-					let response = { ...data }
-					self.broadcast('deleteDocument', socket, response)
-				} else {
-					self.wsManager.send(socket, 'ServerError', error);
-				}
+			this.crud.deleteDocument(Data).then((data) => {
+				self.broadcast('deleteDocument', socket, data)
 			})
-			// this.wsManager.send(socket, 'deleteIndustry', { ...response});
 		} catch (error) {
 			console.log(error)
 		}
@@ -194,33 +176,28 @@ class CoCreateIndustry {
 	 * Run Industry logic
 	 **/
 	 async runIndustry(socket, data) {
-		const {industry_id, newOrg_id} = data
-		const db = data.organization_id;
-		let industryDocumentsCollection = this.dbClient.db(db).collection('industry_documents');
+		const {industry_id, newOrg_id, organization_id} = data
 
+		let industry = await this.crud.readDocument({collection: 'industries', document: {_id: industry_id}, organization_id})
+		industry = industry.document[0]
 
-		let industry = await this.dbClient.db(db).collection('industries').findOne({_id: ObjectId(industry_id)});
 		let error = null;
 
 		if (!industry._id) {
 			error = "Can't get industry"
 		} else {
-			let newOrgDocument = await this.dbClient.db(db).collection('organizations').findOne({_id: ObjectId(newOrg_id)});
-			
+			let newOrgDocument = await this.crud.readDocument({collection: 'organizations', document: {_id: newOrg_id}, organization_id})
+			newOrgDocument = newOrgDocument.document[0]
 			if (!newOrgDocument) {
 				error = "Can't get organization";
 			} else {
 				let new_subdomain = newOrgDocument && newOrgDocument.domains ? newOrgDocument.domains[0] : "";
-				
-				const {idPairs} = await this.createEmptyDocumentsFromIndustry
-				(
-					industryDocumentsCollection, 
+				await this.createEmptyDocumentsFromIndustry (
 					industry_id, 
 					newOrgDocument,
 					industry.organization_data || {}, 
 					new_subdomain
 				);
-				await this.updateDocumentsByIndustry(idPairs, newOrg_id)	
 				this.wsManager.send(socket, 'runIndustry', {
 					error: false,
 					message: "successfuly",
@@ -239,38 +216,44 @@ class CoCreateIndustry {
 
 	}
 	
-	async createEmptyDocumentsFromIndustry(industryDocumentsCollection, industry_id, newOrg, orgData, new_subdomain) {
+	async createEmptyDocumentsFromIndustry(industry_id, newOrg, orgData, new_subdomain) {
 		const newOrgId = newOrg._id.toString();
 		const newOrgApiKey = newOrg.apiKey;
 
 		const {subdomain, apiKey, organization_id} = orgData;
 		
-		const newDB = this.dbClient.db(newOrgId);
 		const self = this;
 		let idPairs = [];
-		
-		let documentCursor = industryDocumentsCollection.find({"industry_data.industry_id" : industry_id})
-		
-		while(await documentCursor.hasNext()) {
-			let document = await documentCursor.next();
-			const {collection, document_id, industry_id} = document.industry_data || {}
+
+		let data = await this.crud.readDocument({collection: 'industry_documents', filter: {query: [{name: "industry_data.industry_id", value: industry_id, operator: '$eq'}]}, organization_id})
+
+		// ToDo: support for opening cursor with crud?
+		// let documentCursor = industryDocumentsCollection.find({"industry_data.industry_id" : industry_id})		
+		// while(await documentCursor.hasNext()) {
+		// 	let document = await documentCursor.next();
+		for (let document of data.document) {
+			const {collection, document_id} = document.industry_data || {}
 			if (!collection || !document_id) {
 				continue;
 			}
-			const collectionInstance = newDB.collection(collection);
 
+			document['_id'] = this.crud.ObjectId()
 			document['organization_id'] = newOrgId;
 			
-			delete document['_id'];
+			delete document['db'];
+			delete document['database'];
+			delete document['collection'];
 			delete document['industry_data'];
-			
+
 			//. replace subdomain
 			for (let field in document) {
 				if (field != '_id' && field != 'organization_id') {
+					if (document_id && document['_id']) {
+						document[field] = self.replaceContent(document[field], document_id, document['_id']);
+					}
 					if (subdomain && new_subdomain) {
 						document[field] = self.replaceContent(document[field], subdomain, new_subdomain);
 					}
-					
 					if (newOrgId && organization_id) {
 						document[field] = self.replaceContent(document[field], organization_id, newOrgId);
 					}
@@ -280,52 +263,11 @@ class CoCreateIndustry {
 				}
 			}
 
-			let newDocument = await collectionInstance.insertOne(document);
-			if (newDocument) {
-				idPairs.push({
-					new_id : `${newDocument.insertedId}`,
-					old_id : document_id,
-					collection_name: collection
-				})
-			}		
+			await this.crud.createDocument({collection, document, organization_id: newOrgId})
 		}
-		// console.log(idPairs);
-		// console.log(idPairs.length);
-		
-		return {
-			idPairs: idPairs
-		}
+		return
 	}
-	
-	async updateDocumentsByIndustry(idPairs, newOrgId) {
-		const newDB = this.dbClient.db(newOrgId);
-		
-		for (let i = 0; i < idPairs.length; i++) {
-			const {collection_name, new_id} = idPairs[i];
-			const collection = newDB.collection(collection_name);
 			
-			let document = await collection.findOne({'_id': ObjectId(new_id)});
-			
-			for (let field in document) {
-				if (field != '_id' && field != 'organization_id') {
-					var newFieldValue = this.replaceId(document[field], idPairs);
-					document[field] = newFieldValue;
-				}
-			}
-			
-			delete document['_id'];
-			await collection.findOneAndUpdate({'_id': ObjectId(new_id)}, {$set: document});
-		}
-	}
-	
-	replaceId(fieldValue, idPairs) {
-		const self = this;
-		idPairs.forEach(({old_id, new_id}) => {
-			fieldValue = self.replaceContent(fieldValue, old_id, new_id)
-		})
-		return fieldValue;
-	}
-	
 	replaceContent(content, src, target) {
 		const type = typeof content
 		if (type == 'string') {
