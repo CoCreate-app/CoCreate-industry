@@ -102,7 +102,7 @@ const CoCreateIndustry = {
 		selectedEls.forEach((el) => {
 			let industry_id = el.getAttribute('document_id');
 
-			if(crud.checkAttrValue(industry_id)) {
+			if(crud.checkValue(industry_id)) {
 				const room = config.organization_id;
 				crud.socket.send('deleteIndustry', {
 					apiKey: config.apiKey,
