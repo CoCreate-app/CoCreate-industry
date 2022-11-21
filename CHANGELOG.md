@@ -1,3 +1,17 @@
+# [1.8.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.7.11...v1.8.0) (2022-11-21)
+
+
+### Bug Fixes
+
+* renamed crud.checkAttrValue to crud.checkValue ([4800953](https://github.com/CoCreate-app/CoCreate-industry/commit/4800953912fd3d6f651fcd3e353c3045c97ca822))
+* update crud functions to receive an array of objects as the response ([b253c1a](https://github.com/CoCreate-app/CoCreate-industry/commit/b253c1a488618789d1d2552d6477d4fa19f77895))
+
+
+### Features
+
+* Add @cocreate/element-prototype ([6201683](https://github.com/CoCreate-app/CoCreate-industry/commit/6201683607c56bdea5c2ba62070b3bb25968957b))
+* updated to use new crud which has the abilty to use multiple databases ([75a8b03](https://github.com/CoCreate-app/CoCreate-industry/commit/75a8b037f055891c145674ffc3415761169047e3))
+
 ## [1.7.11](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.7.10...v1.7.11) (2022-10-02)
 
 
