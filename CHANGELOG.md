@@ -1,3 +1,10 @@
+## [1.8.4](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.3...v1.8.4) (2022-11-21)
+
+
+### Bug Fixes
+
+* replaced document_id with document._id ([90b3723](https://github.com/CoCreate-app/CoCreate-industry/commit/90b37230c2ccbfef8e17e36a6aaab1e03d884239))
+
 ## [1.8.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.2...v1.8.3) (2022-11-21)
 
 
