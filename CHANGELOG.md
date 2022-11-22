@@ -1,3 +1,11 @@
+## [1.8.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.5...v1.8.6) (2022-11-22)
+
+
+### Bug Fixes
+
+* apply src: {{source}} to CoCreate.config ([fcb889d](https://github.com/CoCreate-app/CoCreate-industry/commit/fcb889ddcd40e2835910fb03bcee0a90a5492443))
+* workflow docs ([c83dd96](https://github.com/CoCreate-app/CoCreate-industry/commit/c83dd96ccd6eee8be44d05a8b59ec5f8c74917c4))
+
 ## [1.8.5](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.4...v1.8.5) (2022-11-21)
 
 
