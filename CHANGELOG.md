@@ -1,3 +1,10 @@
+## [1.8.7](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.6...v1.8.7) (2022-11-23)
+
+
+### Bug Fixes
+
+* bumped [@cocreate](https://github.com/cocreate) dependencies ([43471d7](https://github.com/CoCreate-app/CoCreate-industry/commit/43471d74d8dbe8abb903cf07fa3e6f5314bf3dd8))
+
 ## [1.8.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.5...v1.8.6) (2022-11-22)
 
 
