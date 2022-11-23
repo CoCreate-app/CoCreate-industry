@@ -3,7 +3,7 @@ import '@cocreate/element-prototype';
 import action from '@cocreate/actions';
 
 let crud
-if(CRUD && CRUD.default)
+if (CRUD && CRUD.default)
 	crud = CRUD.default
 else
 	crud = CRUD
@@ -95,14 +95,14 @@ const CoCreateIndustry = {
 
 	deleteIndustries: function(btn) {
 		const dataTemplateid = btn.getAttribute('template_id');
-		if(!dataTemplateid) return;
+		if (!dataTemplateid) return;
 
 		const selectedEls = document.querySelectorAll(`.selected[templateid="${dataTemplateid}"]`);
 
 		selectedEls.forEach((el) => {
 			let industry_id = el.getAttribute('document_id');
 
-			if(crud.checkValue(industry_id)) {
+			if (crud.checkValue(industry_id)) {
 				const room = config.organization_id;
 				crud.socket.send('deleteIndustry', {
 					apiKey: config.apiKey,
