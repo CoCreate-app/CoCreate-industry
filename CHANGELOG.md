@@ -1,3 +1,11 @@
+## [1.8.9](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.8...v1.8.9) (2022-11-25)
+
+
+### Bug Fixes
+
+* bump dependencies ([44e1e26](https://github.com/CoCreate-app/CoCreate-industry/commit/44e1e261314897a691eaebb08fe2261e6bb67d80))
+* CoCreate.crud.default removed bug causing default object ([b0df575](https://github.com/CoCreate-app/CoCreate-industry/commit/b0df5753dc692e33566ad2905b4affb8304a47e0))
+
 ## [1.8.8](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.7...v1.8.8) (2022-11-24)
 
 
