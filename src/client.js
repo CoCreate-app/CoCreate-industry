@@ -61,7 +61,8 @@ const CoCreateIndustry = {
 			db: config.organization_id,
 			collection: 'industries',
 			industry_id,
-			data: data
+			data: data,
+			broadcastBrowser: false
 		}, room);
 	},
 
@@ -80,6 +81,7 @@ const CoCreateIndustry = {
 			organization_id: config.organization_id,
 			collection: 'industries',
 			industry_id: industry_id,
+			broadcastBrowser: false
 		}, room);
 
 		document.dispatchEvent(new CustomEvent('deletedIndustry', {
@@ -129,6 +131,7 @@ const CoCreateIndustry = {
 					organization_id: crud.socket.config.organization_id,
 					industry_id: industry_id,
 					newOrg_id: newOrgId,
+					broadcastBrowser: false
 					// db: config.organization_id
 				});
 			}
