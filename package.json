@@ -57,9 +57,9 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
-    "@cocreate/actions": "^1.5.27",
+    "@cocreate/actions": "^1.5.28",
     "@cocreate/crud-client": "^1.15.10",
-    "@cocreate/docs": "^1.4.10",
+    "@cocreate/docs": "^1.4.11",
     "@cocreate/element-prototype": "^1.1.15",
     "mongodb": "^4.4.0"
   }
