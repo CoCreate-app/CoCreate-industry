@@ -1,3 +1,12 @@
+## [1.8.14](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.13...v1.8.14) (2022-12-02)
+
+
+### Bug Fixes
+
+* bump dependencies ([c616e27](https://github.com/CoCreate-app/CoCreate-industry/commit/c616e27a15dd08624b9c90f316c96cef469c079f))
+* docs ([072e97f](https://github.com/CoCreate-app/CoCreate-industry/commit/072e97f85ffcbc4e794927b6c97f8aae2b6bc7b5))
+* set broadcastBrowser to false ([dd8db7f](https://github.com/CoCreate-app/CoCreate-industry/commit/dd8db7fe659bc691da487e3e9bbd3a407129e8f0))
+
 ## [1.8.13](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.12...v1.8.13) (2022-11-28)
 
 
