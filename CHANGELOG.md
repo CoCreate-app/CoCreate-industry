@@ -1,3 +1,10 @@
+## [1.8.17](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.16...v1.8.17) (2022-12-08)
+
+
+### Bug Fixes
+
+* removed mongodb dependency ([0c9686e](https://github.com/CoCreate-app/CoCreate-industry/commit/0c9686eb4890bd423a193e66d625b56f81db8e6b))
+
 ## [1.8.16](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.15...v1.8.16) (2022-12-07)
 
 
