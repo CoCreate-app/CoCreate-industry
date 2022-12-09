@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/industry",
-  "version": "1.8.18",
+  "version": "1.8.19",
   "description": "An Exhaustive business app template based on vanilla javascript similar to a website template featuring websites, specialty crm, email templates for creating complex business workspace/shell. Easily configured using HTML5 attributes and/or JavaScript API.",
   "keywords": [
     "industry",
@@ -20,7 +20,9 @@
     "html5-framework",
     "javascript-framework"
   ],
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "npx webpack --config webpack.config.js",
     "build": "NODE_ENV=production npx webpack --config webpack.config.js",
@@ -34,7 +36,9 @@
   },
   "author": "CoCreate LLC",
   "license": "MIT",
-  "bugs": { "url": "https://github.com/CoCreate-app/CoCreate-industry/issues" },
+  "bugs": {
+    "url": "https://github.com/CoCreate-app/CoCreate-industry/issues"
+  },
   "homepage": "https://cocreate.app/docs/industry",
   "funding": {
     "type": "GitHub Sponsors ❤",
