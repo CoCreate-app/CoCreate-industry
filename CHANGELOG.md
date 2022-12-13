@@ -1,3 +1,10 @@
+## [1.8.23](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.22...v1.8.23) (2022-12-13)
+
+
+### Bug Fixes
+
+* removed un used devDependencies ([621f08c](https://github.com/CoCreate-app/CoCreate-industry/commit/621f08c6ca84fc177bbf5d92fb66c2ee2a863fea))
+
 ## [1.8.22](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.21...v1.8.22) (2022-12-13)
 
 
