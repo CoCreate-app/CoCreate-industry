@@ -1,3 +1,10 @@
+## [1.8.24](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.23...v1.8.24) (2022-12-15)
+
+
+### Bug Fixes
+
+* add missing dev dependency style-loader ([022b11d](https://github.com/CoCreate-app/CoCreate-industry/commit/022b11dbcb7e782ccc102b05c73d62df601de275))
+
 ## [1.8.23](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.22...v1.8.23) (2022-12-13)
 
 
