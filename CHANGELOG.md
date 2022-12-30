@@ -1,3 +1,10 @@
+## [1.8.33](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.32...v1.8.33) (2022-12-30)
+
+
+### Bug Fixes
+
+* update config sources to use template  braces with entry on src ([7bcc1e5](https://github.com/CoCreate-app/CoCreate-industry/commit/7bcc1e5001b71d46915dfa7a4c29e6f040668f91))
+
 ## [1.8.32](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.31...v1.8.32) (2022-12-29)
 
 
