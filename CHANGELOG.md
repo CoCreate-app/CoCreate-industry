@@ -1,3 +1,10 @@
+## [1.8.35](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.34...v1.8.35) (2023-01-01)
+
+
+### Bug Fixes
+
+* docs sanbox overflow ([c592805](https://github.com/CoCreate-app/CoCreate-industry/commit/c5928051c43a93ff98f2996a4bcbd3baeaba9172))
+
 ## [1.8.34](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.33...v1.8.34) (2022-12-31)
 
 
