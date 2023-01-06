@@ -1,3 +1,11 @@
+## [1.8.37](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.36...v1.8.37) (2023-01-06)
+
+
+### Bug Fixes
+
+* bump dependencies, worklow [@v3](https://github.com/v3) ([921c81c](https://github.com/CoCreate-app/CoCreate-industry/commit/921c81c9062b69e6da9efc3d8f88389312368050))
+* edit in github btn styles ([3b6be95](https://github.com/CoCreate-app/CoCreate-industry/commit/3b6be95e3f341bd516a0532bc3978f3265a2ea91))
+
 ## [1.8.36](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.35...v1.8.36) (2023-01-05)
 
 
