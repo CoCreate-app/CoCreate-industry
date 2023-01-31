@@ -1,3 +1,10 @@
+## [1.8.45](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.44...v1.8.45) (2023-01-31)
+
+
+### Bug Fixes
+
+* bump dependencies ([ef7351c](https://github.com/CoCreate-app/CoCreate-industry/commit/ef7351c26fb9ee232065a98ea9e960e7a3e7e16b))
+
 ## [1.8.44](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.8.43...v1.8.44) (2023-01-30)
 
 
