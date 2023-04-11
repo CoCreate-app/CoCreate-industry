@@ -1,6 +1,6 @@
 {
   "name": "@cocreate/industry",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "description": "An Exhaustive business app template based on vanilla javascript similar to a website template featuring websites, specialty crm, email templates for creating complex business workspace/shell. Easily configured using HTML5 attributes and/or JavaScript API.",
   "keywords": [
     "industry",
@@ -60,9 +60,9 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
-    "@cocreate/actions": "^1.6.1",
-    "@cocreate/crud-client": "^1.19.1",
-    "@cocreate/docs": "^1.6.1",
-    "@cocreate/element-prototype": "^1.6.1"
+    "@cocreate/actions": "^1.6.2",
+    "@cocreate/crud-client": "^1.19.2",
+    "@cocreate/docs": "^1.6.2",
+    "@cocreate/element-prototype": "^1.6.2"
   }
 }
