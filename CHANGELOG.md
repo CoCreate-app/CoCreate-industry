@@ -1,3 +1,11 @@
+## [1.9.4](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.3...v1.9.4) (2023-04-11)
+
+
+### Bug Fixes
+
+* renamed domains to hosts ([682f2d6](https://github.com/CoCreate-app/CoCreate-industry/commit/682f2d698ae321e0d0b7869241a05f36974bc31a))
+* renamed domans to hosts ([a64a06a](https://github.com/CoCreate-app/CoCreate-industry/commit/a64a06aae55652e49f42a6f65f8632cbd7d6a910))
+
 ## [1.9.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.2...v1.9.3) (2023-03-30)
 
 
