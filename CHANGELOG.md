@@ -1,3 +1,10 @@
+## [1.9.7](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.6...v1.9.7) (2023-04-12)
+
+
+### Bug Fixes
+
+* remove room param and updated config to CoCreateConfig ([79f5b0e](https://github.com/CoCreate-app/CoCreate-industry/commit/79f5b0ecc596be05aae27cc83786b87dbd59f499))
+
 ## [1.9.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.5...v1.9.6) (2023-04-11)
 
 
