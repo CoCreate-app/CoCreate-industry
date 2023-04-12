@@ -24,7 +24,7 @@ class CoCreateIndustry {
 
 			let orgDocument = await this.crud.readDocument({
 				database: organization_id, 
-				collection: data.collection,
+				collection: 'organizations',
 				document: {_id: organization_id},
 				organization_id
 			})
@@ -55,13 +55,13 @@ class CoCreateIndustry {
 				console.log('deleting')
 			} else {
 				insertResult = await this.crud.createDocument(update);
-				industry_id = `${insertResult.document._id}`;
+				industry_id = `${insertResult.document[0]._id}`;
 			}
 
 			//. create inustryDocuments
 			const exclusion_collections = ["users", "organizations", "industries", "industry_documents", "crdt-transactions", "metrics"];
-			let collections = await crud.readCollection({database: organization_id, organization_id})
-
+			let collections = await this.crud.readCollection({database: organization_id, organization_id})
+			collections = collections.collection
 			for (let i = 0; i < collections.length; i++) {
 				let collection = collections[i].name;
 				if (exclusion_collections.indexOf(collection) > -1) {
@@ -101,7 +101,7 @@ class CoCreateIndustry {
 			// const documentCursor = collection.find(query);
 			// await documentCursor.forEach(async (document) => {
 
-			const documents = this.crud.readDocument(query);
+			const documents = await this.crud.readDocument(query);
 			for (let document of documents.document) {
 				let documentId = document['_id'].toString();
 	
