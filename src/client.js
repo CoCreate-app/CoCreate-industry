@@ -50,20 +50,19 @@ const CoCreateIndustry = {
 				industry_id = el.getAttribute('document_id')
 		}
 		console.log('industry_id', industry_id)
-		const room = config.organization_id;
 
-		data['organization_id'] = config.organization_id;
+		data['organization_id'] = CoCreateConfig.organization_id;
 		
 		// return;
 		crud.socket.send('createIndustry', {
-			apiKey: config.apiKey,
-			organization_id: config.organization_id,
-			db: config.organization_id,
+			apiKey: CoCreateConfig.apiKey,
+			organization_id: CoCreateConfig.organization_id,
+			db: CoCreateConfig.organization_id,
 			collection: 'industries',
 			industry_id,
-			data: data,
+			data,
 			broadcastBrowser: false
-		}, room);
+		});
 	},
 
 	deleteIndustry: function(btn) {
@@ -74,15 +73,14 @@ const CoCreateIndustry = {
 				industry_id = el.getAttribute('document_id')
 			else return;	
 		}
-		const room = config.organization_id;
 				
 		crud.socket.send('deleteIndustry', {
-			apiKey: config.apiKey,
-			organization_id: config.organization_id,
+			apiKey: CoCreateConfig.apiKey,
+			organization_id: CoCreateConfig.organization_id,
 			collection: 'industries',
 			industry_id: industry_id,
 			broadcastBrowser: false
-		}, room);
+		});
 
 		document.dispatchEvent(new CustomEvent('deletedIndustry', {
 			detail: {}
@@ -99,13 +97,12 @@ const CoCreateIndustry = {
 			let industry_id = el.getAttribute('document_id');
 
 			if (crud.checkValue(industry_id)) {
-				const room = config.organization_id;
 				crud.socket.send('deleteIndustry', {
-					apiKey: config.apiKey,
-					organization_id: config.organization_id,
+					apiKey: CoCreateConfig.apiKey,
+					organization_id: CoCreateConfig.organization_id,
 					collection: 'industries',
 					industry_id: industry_id,
-				}, room);
+				});
 			}
 		});
 
