@@ -32,14 +32,10 @@ const CoCreateIndustry = {
 		let elements = form.querySelectorAll("[collection='industries'][name]");
 		
 		let data = {};
-		//. get form data
 		elements.forEach(el => {
 			let name = el.getAttribute('name');
 			let value = el.getValue();
 			if (!name || !value) return;
-			if (el.getAttribute('data-type') == 'array') {
-				value = [value];
-			}
 			data[name] = value;
 		});
 
