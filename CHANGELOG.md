@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.7...v1.10.0) (2023-04-13)
+
+
+### Features
+
+* data-type replated with value-type, handeled by getValue ([483e0fc](https://github.com/CoCreate-app/CoCreate-industry/commit/483e0fc56852fb27261d3b089a09e907f2a4c61e))
+
 ## [1.9.7](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.6...v1.9.7) (2023-04-12)
 
 
