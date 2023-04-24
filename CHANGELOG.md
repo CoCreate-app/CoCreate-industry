@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.10.0...v1.11.0) (2023-04-24)
+
+
+### Features
+
+* added pwa manifest ([9b3bdef](https://github.com/CoCreate-app/CoCreate-industry/commit/9b3bdefdce7379882fdd323f3d31ca1ee7b8c3a2))
+
 # [1.10.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.9.7...v1.10.0) (2023-04-13)
 
 
