@@ -1,3 +1,11 @@
+## [1.11.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.2...v1.11.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* updated worrkflows to v3 and node version 16 ([4ca2f13](https://github.com/CoCreate-app/CoCreate-industry/commit/4ca2f13cb9b051673ce6d6467712623235d7a6f9))
+* workflow node version updated  16 ([726ceb2](https://github.com/CoCreate-app/CoCreate-industry/commit/726ceb23f9708b7d854ec5116bfa32cdea74dbb7))
+
 ## [1.11.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.1...v1.11.2) (2023-04-24)
 
 
