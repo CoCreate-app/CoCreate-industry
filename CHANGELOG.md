@@ -1,3 +1,10 @@
+## [1.11.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.5...v1.11.6) (2023-05-01)
+
+
+### Bug Fixes
+
+* update manifest.json to manifest.webmanifest ([12a6ea2](https://github.com/CoCreate-app/CoCreate-industry/commit/12a6ea23a15e8ccb1dab675f277e495e21effc59))
+
 ## [1.11.5](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.4...v1.11.5) (2023-05-01)
 
 
