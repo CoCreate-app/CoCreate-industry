@@ -1,3 +1,10 @@
+## [1.11.5](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.4...v1.11.5) (2023-05-01)
+
+
+### Bug Fixes
+
+* replace fontawesome with svg ([a788336](https://github.com/CoCreate-app/CoCreate-industry/commit/a788336ece26a9759059890dc8fdd4b13ef22def))
+
 ## [1.11.4](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.3...v1.11.4) (2023-04-30)
 
 
