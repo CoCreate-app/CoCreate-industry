@@ -1,3 +1,10 @@
+## [1.11.8](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.7...v1.11.8) (2023-05-07)
+
+
+### Bug Fixes
+
+* crud.wsManger ([d04d3ea](https://github.com/CoCreate-app/CoCreate-industry/commit/d04d3eaaaa0c6da12a56cdf0fff0ae0f0ff55119))
+
 ## [1.11.7](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.6...v1.11.7) (2023-05-06)
 
 
