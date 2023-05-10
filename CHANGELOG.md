@@ -1,3 +1,11 @@
+## [1.11.9](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.8...v1.11.9) (2023-05-10)
+
+
+### Bug Fixes
+
+* apikey renamed to key ([b376c60](https://github.com/CoCreate-app/CoCreate-industry/commit/b376c6040f5762d35cf7534135547424a17a101d))
+* apikey renamed to key ([225e86d](https://github.com/CoCreate-app/CoCreate-industry/commit/225e86df547b610ed8634265f274d839efff0950))
+
 ## [1.11.8](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.7...v1.11.8) (2023-05-07)
 
 
