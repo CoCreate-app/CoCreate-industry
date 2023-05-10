@@ -40,7 +40,7 @@ class CoCreateIndustry {
 					organization_data: {
 						subdomain,
 						organization_id,
-						apiKey: orgDocument.apiKey
+						key: orgDocument.key
 					}
 				},
 				organization_id
@@ -218,9 +218,9 @@ class CoCreateIndustry {
 	
 	async createEmptyDocumentsFromIndustry(industry_id, newOrg, orgData, new_subdomain) {
 		const newOrgId = newOrg._id.toString();
-		const newOrgApiKey = newOrg.apiKey;
+		const newOrgKey = newOrg.key;
 
-		const {subdomain, apiKey, organization_id} = orgData;
+		const {subdomain, key, organization_id} = orgData;
 		
 		const self = this;
 		let idPairs = [];
@@ -257,8 +257,8 @@ class CoCreateIndustry {
 					if (newOrgId && organization_id) {
 						document[field] = self.replaceContent(document[field], organization_id, newOrgId);
 					}
-					if (newOrgApiKey && apiKey) {
-						document[field] = self.replaceContent(document[field], apiKey, newOrgApiKey);
+					if (newOrgKey && key) {
+						document[field] = self.replaceContent(document[field], key, newOrgKey);
 					}
 				}
 			}

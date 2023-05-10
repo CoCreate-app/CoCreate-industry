@@ -51,7 +51,7 @@ const CoCreateIndustry = {
 		
 		// return;
 		crud.socket.send('createIndustry', {
-			apiKey: CoCreateConfig.apiKey,
+			key: CoCreateConfig.key,
 			organization_id: CoCreateConfig.organization_id,
 			db: CoCreateConfig.organization_id,
 			collection: 'industries',
@@ -71,7 +71,7 @@ const CoCreateIndustry = {
 		}
 				
 		crud.socket.send('deleteIndustry', {
-			apiKey: CoCreateConfig.apiKey,
+			key: CoCreateConfig.key,
 			organization_id: CoCreateConfig.organization_id,
 			collection: 'industries',
 			industry_id: industry_id,
@@ -94,7 +94,7 @@ const CoCreateIndustry = {
 
 			if (crud.checkValue(industry_id)) {
 				crud.socket.send('deleteIndustry', {
-					apiKey: CoCreateConfig.apiKey,
+					key: CoCreateConfig.key,
 					organization_id: CoCreateConfig.organization_id,
 					collection: 'industries',
 					industry_id: industry_id,
@@ -120,7 +120,7 @@ const CoCreateIndustry = {
 			if (industry_id && newOrgId) {
 				console.log('config', CoCreateConfig)
 				crud.socket.send('runIndustry', {
-					apiKey: crud.socket.config.apiKey,
+					key: crud.socket.config.key,
 					organization_id: crud.socket.config.organization_id,
 					industry_id: industry_id,
 					newOrg_id: newOrgId,
