@@ -13,7 +13,7 @@ class CoCreateIndustry {
 		}
 	}
 	
-	// ToDo: perform action on primary db only and improve params names
+	// TODO: perform action on primary db only and improve params names
 	/**
 	 * Create industry
 	 **/
@@ -97,7 +97,7 @@ class CoCreateIndustry {
 				organization_id: organizationId
 			}
 
-			// ToDo: support for opening cursor with crud?
+			// TODO: support for opening cursor with crud?
 			// const documentCursor = collection.find(query);
 			// await documentCursor.forEach(async (document) => {
 
@@ -227,7 +227,7 @@ class CoCreateIndustry {
 
 		let data = await this.crud.readDocument({collection: 'industry_documents', filter: {query: [{name: "industry_data.industry_id", value: industry_id, operator: '$eq'}]}, organization_id})
 
-		// ToDo: support for opening cursor with crud?
+		// TODO: support for opening cursor with crud?
 		// let documentCursor = industryDocumentsCollection.find({"industry_data.industry_id" : industry_id})		
 		// while(await documentCursor.hasNext()) {
 		// 	let document = await documentCursor.next();
