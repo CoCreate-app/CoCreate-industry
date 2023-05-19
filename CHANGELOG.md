@@ -1,3 +1,10 @@
+## [1.11.10](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.9...v1.11.10) (2023-05-19)
+
+
+### Bug Fixes
+
+* update packages to latest version. This commit updates various packages in the dependencies section of the package.json file to their latest published versions, thereby fixing multiple bugs and improving overall performance. ([0185e3d](https://github.com/CoCreate-app/CoCreate-industry/commit/0185e3dfe8bde1629df4a237e6f4f33a3895bf75))
+
 ## [1.11.9](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.8...v1.11.9) (2023-05-10)
 
 
