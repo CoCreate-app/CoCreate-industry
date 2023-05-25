@@ -1,3 +1,10 @@
+## [1.11.13](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.12...v1.11.13) (2023-05-25)
+
+
+### Bug Fixes
+
+* removed documentChange event ([0b1ad91](https://github.com/CoCreate-app/CoCreate-industry/commit/0b1ad91ee5abf344a0e48ec4a8a847783299dc26))
+
 ## [1.11.12](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.11...v1.11.12) (2023-05-21)
 
 
