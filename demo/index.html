@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Industry | CoCreateJS</title>
+        <link
+            rel="icon"
+            href="https://cdn.cocreate.app/favicon.ico"
+            type="image/ico"
+            sizes="16x16" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+    </head>
 
-	<head>
-		<title>Industry | CoCreateJS</title>
-		<link rel="icon" href="https://cdn.cocreate.app/favicon.ico" type="image/ico" sizes="16x16">
-		<link rel="manifest" href="/manifest.webmanifest" />
-	</head>
+    <body>
+        <form>
+            <input
+                collection="industries"
+                name="name"
+                placeholder="industry Name"
+                class="floating-label" />
+            <button actions="createIndustry">Create</button>
+            <button
+                actions="deleteIndustry"
+                industry_id="6223c9a561f00516deff2c0e">
+                Delete
+            </button>
+        </form>
 
-	<body>
-		<form>
-			<input collection='industries' name="name" placeholder="industry Name" class="floating-label">
-			<button actions="createIndustry">Create</button>
-			<button actions="deleteIndustry" industry_id="6223c9a561f00516deff2c0e">Delete</button>
-		</form>
-
-		<!--<script src="https://cdn.cocreate.app/latest/CoCreate.min.js" ></script>-->
-		
-
-	</body>
-
+        <!--<script src="https://cdn.cocreate.app/latest/CoCreate.min.js"  ></script>-->
+    </body>
 </html>
