@@ -1,3 +1,10 @@
+## [1.11.14](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.13...v1.11.14) (2023-06-04)
+
+
+### Bug Fixes
+
+* **semantic-release:** worklow error solved by running node version 14 ([e6dff80](https://github.com/CoCreate-app/CoCreate-industry/commit/e6dff80f948c77676e95e091c31f70972e3b98b5))
+
 ## [1.11.13](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.12...v1.11.13) (2023-05-25)
 
 
