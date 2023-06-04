@@ -1,3 +1,10 @@
+## [1.11.17](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.16...v1.11.17) (2023-06-04)
+
+
+### Bug Fixes
+
+* Refactor CoCreate.config.js to remove hard-coded credentials ([34b1eab](https://github.com/CoCreate-app/CoCreate-industry/commit/34b1eabc1053a2c46ca9571f2d0f13f231c5a9aa))
+
 ## [1.11.16](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.15...v1.11.16) (2023-06-04)
 
 
