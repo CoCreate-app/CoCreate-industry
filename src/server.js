@@ -31,7 +31,7 @@ class CoCreateIndustry {
 
             orgDocument = orgDocument.document[0]
 
-            let subdomain = orgDocument && orgDocument.hosts ? orgDocument.hosts[0] : "";
+            let subdomain = orgDocument && orgDocument.host ? orgDocument.host[0] : "";
             let update = {
                 database: organization_id,
                 collection: data.collection,
@@ -191,7 +191,7 @@ class CoCreateIndustry {
             if (!newOrgDocument) {
                 error = "Can't get organization";
             } else {
-                let new_subdomain = newOrgDocument && newOrgDocument.hosts ? newOrgDocument.hosts[0] : "";
+                let new_subdomain = newOrgDocument && newOrgDocument.host ? newOrgDocument.host[0] : "";
                 await this.createEmptyDocumentsFromIndustry(
                     industry_id,
                     newOrgDocument,
