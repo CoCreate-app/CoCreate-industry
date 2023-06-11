@@ -1,3 +1,11 @@
+## [1.11.20](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.19...v1.11.20) (2023-06-11)
+
+
+### Bug Fixes
+
+* renamed db to storage ([aaa7abf](https://github.com/CoCreate-app/CoCreate-industry/commit/aaa7abfad311a4d38c8eb928e799bc172e4286d3))
+* renamed hosts to host. the value can be a string or an array of strings ([d0e5024](https://github.com/CoCreate-app/CoCreate-industry/commit/d0e5024ce8dcc7a6a9412a7d678b97a655fb7436))
+
 ## [1.11.19](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.18...v1.11.19) (2023-06-10)
 
 
