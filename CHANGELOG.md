@@ -1,3 +1,11 @@
+## [1.11.26](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.25...v1.11.26) (2023-06-11)
+
+
+### Bug Fixes
+
+* testing workflow ([7c73749](https://github.com/CoCreate-app/CoCreate-industry/commit/7c7374979d7c5e7027f23f364ccbab5c2f2bc32f))
+* testing workflow ([2caead6](https://github.com/CoCreate-app/CoCreate-industry/commit/2caead6050a56f45b81cdbd50dda4143eb7bf0e2))
+
 ## [1.11.25](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.24...v1.11.25) (2023-06-11)
 
 
