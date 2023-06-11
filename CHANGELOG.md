@@ -1,3 +1,10 @@
+## [1.11.23](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.22...v1.11.23) (2023-06-11)
+
+
+### Bug Fixes
+
+* postintall error ([8c3f49a](https://github.com/CoCreate-app/CoCreate-industry/commit/8c3f49acb9a25daafecdf78ed8150b38770db0e5))
+
 ## [1.11.22](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.21...v1.11.22) (2023-06-11)
 
 
