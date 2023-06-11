@@ -72,7 +72,7 @@ class CoCreateIndustry {
 
             //. update subdomain
             const response = {
-                'db': data['db'],
+                'storage': data['storage'],
                 'collection': data.collection,
                 'document_id': industry_id,
                 'organization_id': organization_id,
@@ -240,7 +240,7 @@ class CoCreateIndustry {
             document['_id'] = this.crud.ObjectId()
             document['organization_id'] = newOrgId;
 
-            delete document['db'];
+            delete document['storage'];
             delete document['database'];
             delete document['collection'];
             delete document['industry_data'];
