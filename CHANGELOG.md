@@ -1,3 +1,10 @@
+## [1.11.22](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.21...v1.11.22) (2023-06-11)
+
+
+### Bug Fixes
+
+* @cocreate/cli moved to dependencies ([5cebb6b](https://github.com/CoCreate-app/CoCreate-industry/commit/5cebb6b69bd1688f370f56eb8be6ad773fab6252))
+
 ## [1.11.21](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.20...v1.11.21) (2023-06-11)
 
 
