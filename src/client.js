@@ -29,7 +29,7 @@ const CoCreateIndustry = {
         let form = btn.closest("form");
         if (!form) return;
 
-        let elements = form.querySelectorAll("[collection='industries'][name]");
+        let elements = form.querySelectorAll("[array='industries'][name]");
 
         let data = {};
         elements.forEach(el => {
@@ -41,20 +41,21 @@ const CoCreateIndustry = {
 
         let industry_id = btn.getAttribute('industry_id');
         if (!industry_id) {
-            let el = btn.closest('[collection="industries"]')
+            let el = btn.closest('[array="industries"]')
             if (el)
-                industry_id = el.getAttribute('document_id')
+                industry_id = el.getAttribute('object')
         }
         console.log('industry_id', industry_id)
 
         data['organization_id'] = CoCreateConfig.organization_id;
 
         // return;
-        crud.socket.send('createIndustry', {
+        crud.socket.send({
+            method: 'createIndustry',
             key: CoCreateConfig.key,
             organization_id: CoCreateConfig.organization_id,
             db: CoCreateConfig.organization_id,
-            collection: 'industries',
+            array: 'industries',
             industry_id,
             data,
             broadcastBrowser: false
@@ -64,16 +65,17 @@ const CoCreateIndustry = {
     deleteIndustry: function (btn) {
         let industry_id = btn.getAttribute('industry_id');
         if (!industry_id) {
-            let el = btn.closest('[collection="industries"]')
+            let el = btn.closest('[array="industries"]')
             if (el)
-                industry_id = el.getAttribute('document_id')
+                industry_id = el.getAttribute('object')
             else return;
         }
 
-        crud.socket.send('deleteIndustry', {
+        crud.socket.send({
+            method: 'deleteIndustry',
             key: CoCreateConfig.key,
             organization_id: CoCreateConfig.organization_id,
-            collection: 'industries',
+            array: 'industries',
             industry_id: industry_id,
             broadcastBrowser: false
         });
@@ -90,13 +92,14 @@ const CoCreateIndustry = {
         const selectedEls = document.querySelectorAll(`.selected[templateid="${dataTemplateid}"]`);
 
         selectedEls.forEach((el) => {
-            let industry_id = el.getAttribute('document_id');
+            let industry_id = el.getAttribute('object');
 
             if (crud.checkValue(industry_id)) {
-                crud.socket.send('deleteIndustry', {
+                crud.socket.send({
+                    method: 'deleteIndustry',
                     key: CoCreateConfig.key,
                     organization_id: CoCreateConfig.organization_id,
-                    collection: 'industries',
+                    array: 'industries',
                     industry_id: industry_id,
                 });
             }
@@ -115,11 +118,12 @@ const CoCreateIndustry = {
         const industrySelect = form.querySelector("cocreate-select[name='industry']");
         if (industrySelect) {
             const industry_id = industrySelect.selectedOptions[0].getAttribute('value');
-            const newOrgId = industrySelect.getAttribute('document_id');
+            const newOrgId = industrySelect.getAttribute('object');
 
             if (industry_id && newOrgId) {
                 console.log('config', CoCreateConfig)
-                crud.socket.send('runIndustry', {
+                crud.socket.send({
+                    method: 'runIndustry',
                     key: crud.socket.config.key,
                     organization_id: crud.socket.config.organization_id,
                     industry_id: industry_id,

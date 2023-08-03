@@ -22,25 +22,26 @@ class CoCreateIndustry {
             let { organization_id, db, industry_id } = data;
             const self = this;
 
-            let orgDocument = await this.crud.readDocument({
+            let orgObject = await this.crud.send({
+                method: 'read.object',
                 database: organization_id,
-                collection: 'organizations',
-                document: { _id: organization_id },
+                array: 'organizations',
+                object: { _id: organization_id },
                 organization_id
             })
 
-            orgDocument = orgDocument.document[0]
+            orgObject = orgObject.object[0]
 
-            let subdomain = orgDocument && orgDocument.host ? orgDocument.host[0] : "";
+            let subdomain = orgObject && orgObject.host ? orgObject.host[0] : "";
             let update = {
                 database: organization_id,
-                collection: data.collection,
-                document: {
+                array: data.array,
+                object: {
                     ...data.data,
                     organization_data: {
                         subdomain,
                         organization_id,
-                        key: orgDocument.key
+                        key: orgObject.key
                     }
                 },
                 organization_id
@@ -48,87 +49,93 @@ class CoCreateIndustry {
 
             let insertResult;
             if (industry_id) {
-                update.document._id = industry_id
-                insertResult = await this.crud.updateDocument(update)
+                update.method = 'update.object'
+                update.object._id = industry_id
+                insertResult = await this.crud.send(update)
 
-                await this.deleteIndustryDocuments(socket, data)
+                await this.deleteIndustryObjects(socket, data)
                 console.log('deleting')
             } else {
-                insertResult = await this.crud.createDocument(update);
-                industry_id = `${insertResult.document[0]._id}`;
+                update.method = 'create.object'
+                insertResult = await this.crud.send(update);
+                industry_id = `${insertResult.object[0]._id}`;
             }
 
-            //. create inustryDocuments
-            const exclusion_collections = ["users", "organizations", "industries", "industry_documents", "crdt-transactions", "metrics"];
-            let collections = await this.crud.readCollection({ database: organization_id, organization_id })
-            collections = collections.collection
-            for (let i = 0; i < collections.length; i++) {
-                let collection = collections[i].name;
-                if (exclusion_collections.indexOf(collection) > -1) {
+            //. create inustryObjects
+            const exclusion_arrays = ["users", "organizations", "industries", "industry_objects", "crdt-transactions", "metrics"];
+            let arrays = await this.crud.send({ method: 'readCollection', database: organization_id, organization_id })
+            arrays = arrays.array
+            for (let i = 0; i < arrays.length; i++) {
+                let array = arrays[i].name;
+                if (exclusion_arrays.indexOf(array) > -1) {
                     continue;
                 }
-                await self.createIndustryDocuments(collection, industry_id, organization_id, db);
+                await self.createIndustryObjects(array, industry_id, organization_id, db);
             }
 
             //. update subdomain
             const response = {
+                'method': 'createIndustry',
                 'storage': data['storage'],
-                'collection': data.collection,
-                'document_id': industry_id,
+                'array': data.array,
+                'object': industry_id,
                 'organization_id': organization_id,
                 'industry_id': industry_id,
                 'data': data.data,
                 'metadata': data['metadata'],
             }
+            self.wsManager.send(socket, response);
 
-            self.wsManager.send(socket, 'createIndustry', response);
-            self.broadcast('createDocument', socket, response)
+            response.method = 'create.object'
+            self.broadcast(socket, response)
 
         } catch (error) {
             console.log(error)
         }
     }
 
-    async createIndustryDocuments(collectionName, industryId, organizationId, targetDB) {
+    async createIndustryObjects(arrayName, industryId, organizationId, targetDB) {
         try {
             const query = {
+                method: 'read.object',
                 database: organizationId,
-                collection: collectionName,
+                array: arrayName,
                 organization_id: organizationId
             }
 
             // TODO: support for opening cursor with crud?
-            // const documentCursor = collection.find(query);
-            // await documentCursor.forEach(async (document) => {
+            // const objectCursor = array.find(query);
+            // await objectCursor.forEach(async (object) => {
 
-            const documents = await this.crud.readDocument(query);
-            for (let document of documents.document) {
-                let documentId = document['_id'].toString();
+            const objects = await this.crud.send(query);
+            for (let object of objects.object) {
+                let objectId = object['_id'].toString();
 
-                delete document['_id'];
+                delete object['_id'];
 
                 let Data = {
+                    method: 'update.object',
                     database: targetDB,
-                    collection: 'industry_documents',
-                    document: {
+                    array: 'industry_objects',
+                    object: {
                         industry_data: {
-                            document_id: documentId,
+                            object: objectId,
                             industry_id: industryId,
-                            collection: collectionName
+                            array: arrayName
                         }
                     },
                     filter: {
                         query: [
-                            { name: "industry_data.document_id", value: documentId, operator: '$eq' },
+                            { name: "industry_data.object", value: objectId, operator: '$eq' },
                             { name: "industry_data.industry_id", value: industryId, operator: '$eq' },
-                            { name: "industry_data.collection", value: collectionName, operator: '$eq' }
+                            { name: "industry_data.array", value: arrayName, operator: '$eq' }
                         ]
                     },
                     organization_id: organizationId,
                     upsert: true
                 }
 
-                this.crud.updateDocument(Data)
+                this.crud.send(Data)
             }
         }
         catch (e) {
@@ -139,23 +146,24 @@ class CoCreateIndustry {
     async deleteIndustry(socket, data) {
         try {
             const self = this;
-            this.crud.deleteDocument({ ...data, collection: 'industries', document: { _id: data["industry_id"] } }).then((data) => {
-                let response = { document_id: data["industry_id"], ...data }
-                self.broadcast('deleteDocument', socket, response)
+            this.crud.send({ ...data, method: 'delete.object', array: 'industries', object: { _id: data["industry_id"] } }).then((data) => {
+                let response = { object: data["industry_id"], ...data }
+                self.broadcast(socket, response)
             })
 
-            await this.deleteIndustryDocuments(socket, data)
-            this.wsManager.send(socket, 'deleteIndustry', { ...response });
+            await this.deleteIndustryObjects(socket, data)
+            this.wsManager.send(socket, { ...response, method: 'deleteIndustry' });
         } catch (error) {
             console.log(error)
         }
     }
 
-    async deleteIndustryDocuments(socket, data) {
+    async deleteIndustryObjects(socket, data) {
         try {
             const self = this;
             let Data = {
-                collection: 'industry_documents',
+                method: 'delete.object',
+                array: 'industry_objects',
                 filter: {
                     query: [
                         { name: "industry_data.industry_id", value: data.industry_id, operator: '$eq' },
@@ -164,8 +172,8 @@ class CoCreateIndustry {
                 organization_id: data['organization_id']
             }
 
-            this.crud.deleteDocument(Data).then((data) => {
-                self.broadcast('deleteDocument', socket, data)
+            this.crud.send(Data).then((data) => {
+                self.broadcast(socket, data)
             })
         } catch (error) {
             console.log(error)
@@ -178,27 +186,28 @@ class CoCreateIndustry {
     async runIndustry(socket, data) {
         const { industry_id, newOrg_id, organization_id } = data
 
-        let industry = await this.crud.readDocument({ collection: 'industries', document: { _id: industry_id }, organization_id })
-        industry = industry.document[0]
+        let industry = await this.crud.send({ method: 'read.object', array: 'industries', object: { _id: industry_id }, organization_id })
+        industry = industry.object[0]
 
         let error = null;
 
         if (!industry._id) {
             error = "Can't get industry"
         } else {
-            let newOrgDocument = await this.crud.readDocument({ collection: 'organizations', document: { _id: newOrg_id }, organization_id })
-            newOrgDocument = newOrgDocument.document[0]
-            if (!newOrgDocument) {
+            let newOrgObject = await this.crud.send({ method: 'read.object', array: 'organizations', object: { _id: newOrg_id }, organization_id })
+            newOrgObject = newOrgObject.object[0]
+            if (!newOrgObject) {
                 error = "Can't get organization";
             } else {
-                let new_subdomain = newOrgDocument && newOrgDocument.host ? newOrgDocument.host[0] : "";
-                await this.createEmptyDocumentsFromIndustry(
+                let new_subdomain = newOrgObject && newOrgobject.host ? newOrgObject.host[0] : "";
+                await this.createEmptyObjectsFromIndustry(
                     industry_id,
-                    newOrgDocument,
+                    newOrgObject,
                     industry.organization_data || {},
                     new_subdomain
                 );
-                this.wsManager.send(socket, 'runIndustry', {
+                this.wsManager.send(socket, {
+                    method: 'runIndustry',
                     error: false,
                     message: "successfuly",
                     industry_id
@@ -207,7 +216,8 @@ class CoCreateIndustry {
             }
         }
         if (error) {
-            this.wsManager.send(socket, 'runIndustry', {
+            this.wsManager.send(socket, {
+                method: 'runIndustry',
                 error: true,
                 message: error,
             })
@@ -216,7 +226,7 @@ class CoCreateIndustry {
 
     }
 
-    async createEmptyDocumentsFromIndustry(industry_id, newOrg, orgData, new_subdomain) {
+    async createEmptyObjectsFromIndustry(industry_id, newOrg, orgData, new_subdomain) {
         const newOrgId = newOrg._id.toString();
         const newOrgKey = newOrg.key;
 
@@ -225,45 +235,45 @@ class CoCreateIndustry {
         const self = this;
         let idPairs = [];
 
-        let data = await this.crud.readDocument({ collection: 'industry_documents', filter: { query: [{ name: "industry_data.industry_id", value: industry_id, operator: '$eq' }] }, organization_id })
+        let data = await this.crud.send({ method: 'read.object', array: 'industry_objects', filter: { query: [{ name: "industry_data.industry_id", value: industry_id, operator: '$eq' }] }, organization_id })
 
         // TODO: support for opening cursor with crud?
-        // let documentCursor = industryDocumentsCollection.find({"industry_data.industry_id" : industry_id})		
-        // while(await documentCursor.hasNext()) {
-        // 	let document = await documentCursor.next();
-        for (let document of data.document) {
-            const { collection, document_id } = document.industry_data || {}
-            if (!collection || !document_id) {
+        // let objectCursor = industryobjectsCollection.find({"industry_data.industry_id" : industry_id})		
+        // while(await objectCursor.hasNext()) {
+        // 	let object = await objectCursor.next();
+        for (let object of data.object) {
+            const { array, object } = object.industry_data || {}
+            if (!array || !object) {
                 continue;
             }
 
-            document['_id'] = this.crud.ObjectId()
-            document['organization_id'] = newOrgId;
+            object['_id'] = this.crud.ObjectId()
+            object['organization_id'] = newOrgId;
 
-            delete document['storage'];
-            delete document['database'];
-            delete document['collection'];
-            delete document['industry_data'];
+            delete object['storage'];
+            delete object['database'];
+            delete object['array'];
+            delete object['industry_data'];
 
             //. replace subdomain
-            for (let field in document) {
+            for (let field in object) {
                 if (field != '_id' && field != 'organization_id') {
-                    if (document_id && document['_id']) {
-                        document[field] = self.replaceContent(document[field], document_id, document['_id']);
+                    if (object && object['_id']) {
+                        object[field] = self.replaceContent(object[field], object, object['_id']);
                     }
                     if (subdomain && new_subdomain) {
-                        document[field] = self.replaceContent(document[field], subdomain, new_subdomain);
+                        object[field] = self.replaceContent(object[field], subdomain, new_subdomain);
                     }
                     if (newOrgId && organization_id) {
-                        document[field] = self.replaceContent(document[field], organization_id, newOrgId);
+                        object[field] = self.replaceContent(object[field], organization_id, newOrgId);
                     }
                     if (newOrgKey && key) {
-                        document[field] = self.replaceContent(document[field], key, newOrgKey);
+                        object[field] = self.replaceContent(object[field], key, newOrgKey);
                     }
                 }
             }
 
-            await this.crud.createDocument({ collection, document, organization_id: newOrgId })
+            await this.crud.send({ method: 'create.object', array, object, organization_id: newOrgId })
         }
         return
     }
@@ -282,8 +292,8 @@ class CoCreateIndustry {
         return content
     }
 
-    broadcast(component, socket, response) {
-        this.wsManager.broadcast(socket, component, response);
+    broadcast(socket, response) {
+        this.wsManager.broadcast(socket, response);
     }
 }
 
