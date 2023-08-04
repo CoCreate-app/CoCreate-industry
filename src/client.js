@@ -29,14 +29,14 @@ const CoCreateIndustry = {
         let form = btn.closest("form");
         if (!form) return;
 
-        let elements = form.querySelectorAll("[array='industries'][name]");
+        let elements = form.querySelectorAll("[array='industries'][key]");
 
         let data = {};
         elements.forEach(el => {
-            let name = el.getAttribute('name');
+            let key = el.getAttribute('key');
             let value = el.getValue();
-            if (!name || !value) return;
-            data[name] = value;
+            if (!key || !value) return;
+            data[key] = value;
         });
 
         let industry_id = btn.getAttribute('industry_id');
@@ -115,7 +115,7 @@ const CoCreateIndustry = {
         const form = btn.closest('form');
         if (!form) return;
 
-        const industrySelect = form.querySelector("cocreate-select[name='industry']");
+        const industrySelect = form.querySelector("cocreate-select[key='industry']");
         if (industrySelect) {
             const industry_id = industrySelect.selectedOptions[0].getAttribute('value');
             const newOrgId = industrySelect.getAttribute('object');
