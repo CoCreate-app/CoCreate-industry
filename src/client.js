@@ -1,6 +1,7 @@
 import crud from '@cocreate/crud-client';
 import '@cocreate/element-prototype';
 import action from '@cocreate/actions';
+import { checkValue } from '@cocreate/utils';
 
 const CoCreateIndustry = {
     init: function () {
@@ -94,7 +95,7 @@ const CoCreateIndustry = {
         selectedEls.forEach((el) => {
             let industry_id = el.getAttribute('object');
 
-            if (crud.checkValue(industry_id)) {
+            if (checkValue(industry_id)) {
                 crud.socket.send({
                     method: 'deleteIndustry',
                     key: CoCreateConfig.key,
