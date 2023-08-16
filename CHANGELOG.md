@@ -1,3 +1,19 @@
+# [1.12.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.31...v1.12.0) (2023-08-16)
+
+
+### Bug Fixes
+
+* Add @cocreate/utils ([f43ebb2](https://github.com/CoCreate-app/CoCreate-industry/commit/f43ebb28a694f4dc3c706dba5f555d125a8e0835))
+* crud attributes renamed ([3a343ad](https://github.com/CoCreate-app/CoCreate-industry/commit/3a343ad40dcf34576dc5b12e166c3881b0ea877e))
+* replace -target -selector ([ebb4a5a](https://github.com/CoCreate-app/CoCreate-industry/commit/ebb4a5aa0f94f149838b89464e7cbea4e4733569))
+* updated actions callback data object ([8c07c6b](https://github.com/CoCreate-app/CoCreate-industry/commit/8c07c6bb47472a60621cc32a7c4e15091a97b41f))
+* webpack.config and package.json make use of mode=production instead of process.env ([486d49b](https://github.com/CoCreate-app/CoCreate-industry/commit/486d49b14e68192ef5161a6abd10cf2736ade8bf))
+
+
+### Features
+
+* name attribute and variable renamed to key ([e81565b](https://github.com/CoCreate-app/CoCreate-industry/commit/e81565b7a04cd5b51672c68b91a5d72bfa7307c9))
+
 ## [1.11.31](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.11.30...v1.11.31) (2023-06-14)
 
 
