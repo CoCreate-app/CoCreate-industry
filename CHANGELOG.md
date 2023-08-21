@@ -1,3 +1,12 @@
+## [1.13.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.13.0...v1.13.1) (2023-08-21)
+
+
+### Bug Fixes
+
+* /dist/CoCreate.js updated to https://CoCreate.app/dist/CoCreate.js ([4287558](https://github.com/CoCreate-app/CoCreate-industry/commit/4287558e7b8d03a6e518977c457daacec52f26a9))
+* replace cdn with /dist ([8dd12eb](https://github.com/CoCreate-app/CoCreate-industry/commit/8dd12eb3c1538739c7fafccb5f39dea05f75d4ff))
+* update file uploader ([6f65b2c](https://github.com/CoCreate-app/CoCreate-industry/commit/6f65b2c93f6dc58bdc74e68397242bc2fdc3b706))
+
 # [1.13.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.12.0...v1.13.0) (2023-08-17)
 
 
