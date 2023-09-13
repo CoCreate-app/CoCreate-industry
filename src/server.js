@@ -124,7 +124,7 @@ class CoCreateIndustry {
                             array: arrayName
                         }
                     },
-                    filter: {
+                    $filter: {
                         query: [
                             { key: "industry_data.object", value: objectId, operator: '$eq' },
                             { key: "industry_data.industry_id", value: industryId, operator: '$eq' },
@@ -164,7 +164,7 @@ class CoCreateIndustry {
             let Data = {
                 method: 'delete.object',
                 array: 'industry_objects',
-                filter: {
+                $filter: {
                     query: [
                         { key: "industry_data.industry_id", value: data.industry_id, operator: '$eq' },
                     ]
@@ -235,7 +235,7 @@ class CoCreateIndustry {
         const self = this;
         let idPairs = [];
 
-        let data = await this.crud.send({ method: 'read.object', array: 'industry_objects', filter: { query: [{ key: "industry_data.industry_id", value: industry_id, operator: '$eq' }] }, organization_id })
+        let data = await this.crud.send({ method: 'read.object', array: 'industry_objects', $filter: { query: [{ key: "industry_data.industry_id", value: industry_id, operator: '$eq' }] }, organization_id })
 
         // TODO: support for opening cursor with crud?
         // let objectCursor = industryobjectsCollection.find({"industry_data.industry_id" : industry_id})		
