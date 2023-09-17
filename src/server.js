@@ -7,9 +7,9 @@ class CoCreateIndustry {
 
     init() {
         if (this.wsManager) {
-            this.wsManager.on('createIndustry', (socket, data) => this.createIndustry(socket, data));
-            this.wsManager.on('deleteIndustry', (socket, data) => this.deleteIndustry(socket, data));
-            this.wsManager.on('runIndustry', (socket, data) => this.runIndustry(socket, data));
+            this.wsManager.on('createIndustry', (data) => this.createIndustry(data));
+            this.wsManager.on('deleteIndustry', (data) => this.deleteIndustry(data));
+            this.wsManager.on('runIndustry', (data) => this.runIndustry(data));
         }
     }
 
@@ -17,7 +17,7 @@ class CoCreateIndustry {
     /**
      * Create industry
      **/
-    async createIndustry(socket, data) {
+    async createIndustry(data) {
         try {
             let { organization_id, db, industry_id } = data;
             const self = this;
@@ -53,7 +53,7 @@ class CoCreateIndustry {
                 update.object._id = industry_id
                 insertResult = await this.crud.send(update)
 
-                await this.deleteIndustryObjects(socket, data)
+                await this.deleteIndustryObjects(data)
                 console.log('deleting')
             } else {
                 update.method = 'create.object'
@@ -84,10 +84,10 @@ class CoCreateIndustry {
                 'data': data.data,
                 'metadata': data['metadata'],
             }
-            self.wsManager.send(socket, response);
+            self.wsManager.send(response);
 
             response.method = 'create.object'
-            self.broadcast(socket, response)
+            self.broadcast(response)
 
         } catch (error) {
             console.log(error)
@@ -143,22 +143,22 @@ class CoCreateIndustry {
         }
     }
 
-    async deleteIndustry(socket, data) {
+    async deleteIndustry(data) {
         try {
             const self = this;
             this.crud.send({ ...data, method: 'delete.object', array: 'industries', object: { _id: data["industry_id"] } }).then((data) => {
                 let response = { object: data["industry_id"], ...data }
-                self.broadcast(socket, response)
+                self.broadcast(response)
             })
 
-            await this.deleteIndustryObjects(socket, data)
-            this.wsManager.send(socket, { ...response, method: 'deleteIndustry' });
+            await this.deleteIndustryObjects(data)
+            this.wsManager.send({ ...response, method: 'deleteIndustry' });
         } catch (error) {
             console.log(error)
         }
     }
 
-    async deleteIndustryObjects(socket, data) {
+    async deleteIndustryObjects(data) {
         try {
             const self = this;
             let Data = {
@@ -173,7 +173,7 @@ class CoCreateIndustry {
             }
 
             this.crud.send(Data).then((data) => {
-                self.broadcast(socket, data)
+                self.broadcast(data)
             })
         } catch (error) {
             console.log(error)
@@ -183,7 +183,7 @@ class CoCreateIndustry {
     /**
      * Run Industry logic
      **/
-    async runIndustry(socket, data) {
+    async runIndustry(data) {
         const { industry_id, newOrg_id, organization_id } = data
 
         let industry = await this.crud.send({ method: 'read.object', array: 'industries', object: { _id: industry_id }, organization_id })
@@ -206,7 +206,7 @@ class CoCreateIndustry {
                     industry.organization_data || {},
                     new_subdomain
                 );
-                this.wsManager.send(socket, {
+                this.wsManager.send({
                     method: 'runIndustry',
                     error: false,
                     message: "successfuly",
@@ -216,7 +216,7 @@ class CoCreateIndustry {
             }
         }
         if (error) {
-            this.wsManager.send(socket, {
+            this.wsManager.send({
                 method: 'runIndustry',
                 error: true,
                 message: error,
@@ -292,8 +292,8 @@ class CoCreateIndustry {
         return content
     }
 
-    broadcast(socket, response) {
-        this.wsManager.broadcast(socket, response);
+    broadcast(response) {
+        this.wsManager.broadcast(response);
     }
 }
 
