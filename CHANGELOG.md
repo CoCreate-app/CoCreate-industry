@@ -1,3 +1,11 @@
+## [1.14.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.14.2...v1.14.3) (2023-09-18)
+
+
+### Bug Fixes
+
+*  Add path and pathname ([3c75666](https://github.com/CoCreate-app/CoCreate-industry/commit/3c75666bd08bc15dbc1ef4519fcd684927b4e906))
+* Update dCoCreate dpendencies to latest versions ([91920c9](https://github.com/CoCreate-app/CoCreate-industry/commit/91920c9200ef2aa9132a376c70315c1d7b3826b4))
+
 ## [1.14.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.14.1...v1.14.2) (2023-09-17)
 
 
