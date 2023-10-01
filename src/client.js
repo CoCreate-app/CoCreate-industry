@@ -126,7 +126,7 @@ const CoCreateIndustry = {
                 crud.socket.send({
                     method: 'runIndustry',
                     key: crud.socket.config.key,
-                    organization_id: crud.socket.config.organization_id,
+                    organization_id: crud.socket.organization_id,
                     industry_id: industry_id,
                     newOrg_id: newOrgId,
                     broadcastBrowser: false

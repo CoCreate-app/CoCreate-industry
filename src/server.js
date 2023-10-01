@@ -293,7 +293,7 @@ class CoCreateIndustry {
     }
 
     broadcast(response) {
-        this.wsManager.broadcast(response);
+        this.wsManager.send(response);
     }
 }
 
