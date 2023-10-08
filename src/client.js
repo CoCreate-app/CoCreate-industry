@@ -116,6 +116,7 @@ const CoCreateIndustry = {
         const form = btn.closest('form');
         if (!form) return;
 
+        const organization_id = async () => { return await crud.socket.organization_id() }
         const industrySelect = form.querySelector("cocreate-select[key='industry']");
         if (industrySelect) {
             const industry_id = industrySelect.selectedOptions[0].getAttribute('value');
@@ -126,7 +127,7 @@ const CoCreateIndustry = {
                 crud.socket.send({
                     method: 'runIndustry',
                     key: crud.socket.key,
-                    organization_id: crud.socket.organization_id,
+                    organization_id,
                     industry_id: industry_id,
                     newOrg_id: newOrgId,
                     broadcastBrowser: false
