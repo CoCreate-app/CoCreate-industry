@@ -125,7 +125,7 @@ const CoCreateIndustry = {
                 console.log('config', CoCreateConfig)
                 crud.socket.send({
                     method: 'runIndustry',
-                    key: crud.socket.config.key,
+                    key: crud.socket.key,
                     organization_id: crud.socket.organization_id,
                     industry_id: industry_id,
                     newOrg_id: newOrgId,
