@@ -1,3 +1,16 @@
+# [1.16.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.15.0...v1.16.0) (2023-10-09)
+
+
+### Bug Fixes
+
+* broadcast depreciated in favor of send() ([0a63aff](https://github.com/CoCreate-app/CoCreate-industry/commit/0a63aff6b0afb635f97842d7e91fc60e807e0573))
+* socket.config items moved to socket ([43bb5b2](https://github.com/CoCreate-app/CoCreate-industry/commit/43bb5b246209d49520535fd00a6daa5684bfee8a))
+
+
+### Features
+
+* sawait ocket.organization_id() ([f155fce](https://github.com/CoCreate-app/CoCreate-industry/commit/f155fce606a3731fb16d0373d9e6e5f8d35ba45c))
+
 # [1.15.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.14.3...v1.15.0) (2023-09-19)
 
 
