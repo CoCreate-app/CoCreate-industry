@@ -26,19 +26,20 @@ const CoCreateIndustry = {
 
     },
 
-    createIndustry: function (btn) {
+    createIndustry: async function (btn) {
         let form = btn.closest("form");
         if (!form) return;
 
         let elements = form.querySelectorAll("[array='industries'][key]");
 
         let data = {};
-        elements.forEach(el => {
-            let key = el.getAttribute('key');
-            let value = el.getValue();
+        for (let i = 0; i < elements.length; i++) {
+            let key = elements[i].getAttribute('key');
+            let value = await elements[i].getValue();
             if (!key || !value) return;
             data[key] = value;
-        });
+        }
+
 
         let industry_id = btn.getAttribute('industry_id');
         if (!industry_id) {
