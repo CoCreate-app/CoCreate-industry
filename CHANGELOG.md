@@ -1,3 +1,10 @@
+## [1.16.6](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.16.5...v1.16.6) (2023-10-17)
+
+
+### Bug Fixes
+
+* await getValue() ([1dff058](https://github.com/CoCreate-app/CoCreate-industry/commit/1dff05815d7598537a6d500ec6955bdb54b97ca9))
+
 ## [1.16.5](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.16.4...v1.16.5) (2023-10-14)
 
 
