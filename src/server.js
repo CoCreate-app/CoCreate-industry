@@ -247,7 +247,7 @@ class CoCreateIndustry {
                 continue;
             }
 
-            object['_id'] = this.crud.ObjectId()
+            object['_id'] = this.crud.ObjectId().toString();
             object['organization_id'] = newOrgId;
 
             delete object['storage'];
