@@ -62,7 +62,7 @@ class CoCreateIndustry {
             }
 
             //. create inustryObjects
-            const exclusion_arrays = ["users", "organizations", "industries", "industry_objects", "crdt-transactions", "metrics"];
+            const exclusion_arrays = ["users", "organizations", "industries", "industry_objects", "crdt", "metrics"];
             let arrays = await this.crud.send({ method: 'readCollection', database: organization_id, organization_id })
             arrays = arrays.array
             for (let i = 0; i < arrays.length; i++) {
