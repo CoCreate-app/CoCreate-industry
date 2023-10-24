@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.0...v1.17.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* crdt-transactions renamed to crdt ([e60dd99](https://github.com/CoCreate-app/CoCreate-industry/commit/e60dd99533b2ea53092b4452d8caba52c1d666d1))
+
 # [1.17.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.16.6...v1.17.0) (2023-10-22)
 
 
