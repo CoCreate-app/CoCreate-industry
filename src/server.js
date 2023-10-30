@@ -23,7 +23,7 @@ class CoCreateIndustry {
             const self = this;
 
             let orgObject = await this.crud.send({
-                method: 'read.object',
+                method: 'object.read',
                 database: organization_id,
                 array: 'organizations',
                 object: { _id: organization_id },
@@ -49,21 +49,21 @@ class CoCreateIndustry {
 
             let insertResult;
             if (industry_id) {
-                update.method = 'update.object'
+                update.method = 'object.update'
                 update.object._id = industry_id
                 insertResult = await this.crud.send(update)
 
                 await this.deleteIndustryObjects(data)
                 console.log('deleting')
             } else {
-                update.method = 'create.object'
+                update.method = 'object.create'
                 insertResult = await this.crud.send(update);
                 industry_id = `${insertResult.object[0]._id}`;
             }
 
             //. create inustryObjects
             const exclusion_arrays = ["users", "organizations", "industries", "industry_objects", "crdt", "metrics"];
-            let arrays = await this.crud.send({ method: 'readCollection', database: organization_id, organization_id })
+            let arrays = await this.crud.send({ method: 'array.read', database: organization_id, organization_id })
             arrays = arrays.array
             for (let i = 0; i < arrays.length; i++) {
                 let array = arrays[i].name;
