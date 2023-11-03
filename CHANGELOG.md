@@ -1,3 +1,12 @@
+## [1.17.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.2...v1.17.3) (2023-11-03)
+
+
+### Bug Fixes
+
+* favicon.ico path ([d793a22](https://github.com/CoCreate-app/CoCreate-industry/commit/d793a22fdb4255c5ad6c3fdd60516e93b5426048))
+* update dependencies to the lates versions ([be0ea9e](https://github.com/CoCreate-app/CoCreate-industry/commit/be0ea9ea94c3b1ec813aa84600dc7ff52c5a116f))
+* update method to use object.update etc ([b5c3d0e](https://github.com/CoCreate-app/CoCreate-industry/commit/b5c3d0e810af94bef9317072ae90a62ceeafe221))
+
 ## [1.17.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.1...v1.17.2) (2023-10-25)
 
 
