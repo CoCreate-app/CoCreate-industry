@@ -50,7 +50,7 @@ class CoCreateIndustry {
             let insertResult;
             if (industry_id) {
                 update.method = 'object.update'
-                update.object._id = industry_id
+                object.update._id = industry_id
                 insertResult = await this.crud.send(update)
 
                 await this.deleteIndustryObjects(data)
@@ -86,7 +86,7 @@ class CoCreateIndustry {
             }
             self.wsManager.send(response);
 
-            response.method = 'create.object'
+            response.method = 'object.create'
             self.broadcast(response)
 
         } catch (error) {
@@ -97,7 +97,7 @@ class CoCreateIndustry {
     async createIndustryObjects(arrayName, industryId, organizationId, targetDB) {
         try {
             const query = {
-                method: 'read.object',
+                method: 'object.read',
                 database: organizationId,
                 array: arrayName,
                 organization_id: organizationId
@@ -114,7 +114,7 @@ class CoCreateIndustry {
                 delete object['_id'];
 
                 let Data = {
-                    method: 'update.object',
+                    method: 'object.update',
                     database: targetDB,
                     array: 'industry_objects',
                     object: {
@@ -146,7 +146,7 @@ class CoCreateIndustry {
     async deleteIndustry(data) {
         try {
             const self = this;
-            this.crud.send({ ...data, method: 'delete.object', array: 'industries', object: { _id: data["industry_id"] } }).then((data) => {
+            this.crud.send({ ...data, method: 'object.delete', array: 'industries', object: { _id: data["industry_id"] } }).then((data) => {
                 let response = { object: data["industry_id"], ...data }
                 self.broadcast(response)
             })
@@ -162,7 +162,7 @@ class CoCreateIndustry {
         try {
             const self = this;
             let Data = {
-                method: 'delete.object',
+                method: 'object.delete',
                 array: 'industry_objects',
                 $filter: {
                     query: [
@@ -186,7 +186,7 @@ class CoCreateIndustry {
     async runIndustry(data) {
         const { industry_id, newOrg_id, organization_id } = data
 
-        let industry = await this.crud.send({ method: 'read.object', array: 'industries', object: { _id: industry_id }, organization_id })
+        let industry = await this.crud.send({ method: 'object.read', array: 'industries', object: { _id: industry_id }, organization_id })
         industry = industry.object[0]
 
         let error = null;
@@ -194,7 +194,7 @@ class CoCreateIndustry {
         if (!industry._id) {
             error = "Can't get industry"
         } else {
-            let newOrgObject = await this.crud.send({ method: 'read.object', array: 'organizations', object: { _id: newOrg_id }, organization_id })
+            let newOrgObject = await this.crud.send({ method: 'object.read', array: 'organizations', object: { _id: newOrg_id }, organization_id })
             newOrgObject = newOrgObject.object[0]
             if (!newOrgObject) {
                 error = "Can't get organization";
@@ -235,7 +235,7 @@ class CoCreateIndustry {
         const self = this;
         let idPairs = [];
 
-        let data = await this.crud.send({ method: 'read.object', array: 'industry_objects', $filter: { query: [{ key: "industry_data.industry_id", value: industry_id, operator: '$eq' }] }, organization_id })
+        let data = await this.crud.send({ method: 'object.read', array: 'industry_objects', $filter: { query: [{ key: "industry_data.industry_id", value: industry_id, operator: '$eq' }] }, organization_id })
 
         // TODO: support for opening cursor with crud?
         // let objectCursor = industryobjectsCollection.find({"industry_data.industry_id" : industry_id})		
@@ -273,7 +273,7 @@ class CoCreateIndustry {
                 }
             }
 
-            await this.crud.send({ method: 'create.object', array, object, organization_id: newOrgId })
+            await this.crud.send({ method: 'object.create', array, object, organization_id: newOrgId })
         }
         return
     }
