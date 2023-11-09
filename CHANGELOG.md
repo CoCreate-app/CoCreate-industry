@@ -1,3 +1,12 @@
+## [1.17.4](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.3...v1.17.4) (2023-11-09)
+
+
+### Bug Fixes
+
+* meta name typo ([a803e54](https://github.com/CoCreate-app/CoCreate-industry/commit/a803e54654c12fbb753e2c8155dedfa8a6d15fd6))
+* update crud methods ([50e0361](https://github.com/CoCreate-app/CoCreate-industry/commit/50e03615471b168d245ec8969e078a7f4ee06201))
+* update host ([5b84679](https://github.com/CoCreate-app/CoCreate-industry/commit/5b846798ad54cd31c63a85c2aba5d8edd83e38be))
+
 ## [1.17.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.2...v1.17.3) (2023-11-03)
 
 
