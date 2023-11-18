@@ -1,6 +1,6 @@
 import crud from '@cocreate/crud-client';
 import '@cocreate/element-prototype';
-import action from '@cocreate/actions';
+import Actions from '@cocreate/actions';
 import { checkValue } from '@cocreate/utils';
 
 const CoCreateIndustry = {
@@ -26,8 +26,9 @@ const CoCreateIndustry = {
 
     },
 
-    createIndustry: async function (btn) {
-        let form = btn.closest("form");
+    createIndustry: async function (action) {
+        let btn = action.btn
+        let form = action.form
         if (!form) return;
 
         let elements = form.querySelectorAll("[array='industries'][key]");
@@ -113,8 +114,7 @@ const CoCreateIndustry = {
     },
 
 
-    runIndustry: function (btn) {
-        const form = btn.closest('form');
+    runIndustry: function (form) {
         if (!form) return;
 
         const organization_id = async () => { return await crud.socket.organization_id() }
@@ -140,37 +140,36 @@ const CoCreateIndustry = {
     },
 };
 
-action.init({
-    name: "runIndustry",
-    endEvent: "runIndustry",
-    callback: (data) => {
-        CoCreateIndustry.runIndustry(data.element);
+Actions.init(
+    {
+        name: "runIndustry",
+        endEvent: "runIndustry",
+        callback: (action) => {
+            CoCreateIndustry.runIndustry(action.form);
+        },
     },
-});
-
-action.init({
-    name: "createIndustry",
-    endEvent: "createdIndustry",
-    callback: (data) => {
-        CoCreateIndustry.createIndustry(data.element);
+    {
+        name: "createIndustry",
+        endEvent: "createdIndustry",
+        callback: (action) => {
+            CoCreateIndustry.createIndustry(action);
+        },
     },
-});
-
-action.init({
-    name: "deleteIndustry",
-    endEvent: "deletedIndustry",
-    callback: (data) => {
-        CoCreateIndustry.deleteIndustry(data.element);
+    {
+        name: "deleteIndustry",
+        endEvent: "deletedIndustry",
+        callback: (action) => {
+            CoCreateIndustry.deleteIndustry(action.element);
+        },
     },
-});
-
-action.init({
-    name: "deleteIndustries",
-    endEvent: "deletedIndustries",
-    callback: (data) => {
-        CoCreateIndustry.deleteIndustries(data.element);
-    },
-});
+    {
+        name: "deleteIndustries",
+        endEvent: "deletedIndustries",
+        callback: (action) => {
+            CoCreateIndustry.deleteIndustries(action.element);
+        },
+    }
+);
 
 CoCreateIndustry.init();
 
