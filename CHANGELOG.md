@@ -1,3 +1,15 @@
+# [1.18.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.5...v1.18.0) (2023-11-19)
+
+
+### Bug Fixes
+
+* use action.form ([db539ee](https://github.com/CoCreate-app/CoCreate-industry/commit/db539eea5404c39101aa6da667c1fc56302b768b))
+
+
+### Features
+
+* update dependecies for th latest features and bug fixes ([3a574ba](https://github.com/CoCreate-app/CoCreate-industry/commit/3a574ba281629f2389a1a3a4423e02bbf57b8386))
+
 ## [1.17.5](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.4...v1.17.5) (2023-11-12)
 
 
