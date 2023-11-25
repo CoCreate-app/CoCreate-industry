@@ -1,3 +1,15 @@
+# [1.20.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.19.0...v1.20.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* update licensing details ([81fa623](https://github.com/CoCreate-app/CoCreate-industry/commit/81fa623701b404c1d5ac4d854bb43569a850becc))
+
+
+### Features
+
+* upgrade dependencies for latest features and fixes ([a460851](https://github.com/CoCreate-app/CoCreate-industry/commit/a4608515ce40fbbe9c4a2ed56b293da8f61afd6d))
+
 # [1.19.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.18.0...v1.19.0) (2023-11-25)
 
 
