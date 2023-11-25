@@ -1,3 +1,15 @@
+# [1.19.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.18.0...v1.19.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* update nav, edit button and css path ([975abda](https://github.com/CoCreate-app/CoCreate-industry/commit/975abdaefb7685678fe9e3f70c2621e63c505050))
+
+
+### Features
+
+* upgrade dependencies for latest features and fixes ([9b608b2](https://github.com/CoCreate-app/CoCreate-industry/commit/9b608b2f455135f09232f8b6742b6f04dcbb20b0))
+
 # [1.18.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.17.5...v1.18.0) (2023-11-19)
 
 
