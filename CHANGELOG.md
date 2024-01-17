@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.21.0...v1.21.1) (2024-01-17)
+
+
+### Bug Fixes
+
+* update to support new query system ([3dbed59](https://github.com/CoCreate-app/CoCreate-industry/commit/3dbed593f972d709137153c40b1a22e6c1952c6a))
+
 # [1.21.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.20.0...v1.21.0) (2024-01-08)
 
 
