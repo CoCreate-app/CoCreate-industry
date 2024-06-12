@@ -1,3 +1,11 @@
+## [1.21.3](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.21.2...v1.21.3) (2024-06-12)
+
+
+### Bug Fixes
+
+* bump cocreate dependencies ([a04abea](https://github.com/CoCreate-app/CoCreate-industry/commit/a04abeaa3a66e108670048f7b9f748645b510e98))
+* svg icon class ([b4b6598](https://github.com/CoCreate-app/CoCreate-industry/commit/b4b6598a4817643e9ea2283054cdb4bcbbb6646b))
+
 ## [1.21.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.21.1...v1.21.2) (2024-04-29)
 
 
