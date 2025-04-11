@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.22.0...v1.22.1) (2025-04-11)
+
+
+### Bug Fixes
+
+* dispatch end event on action element rather than document ([ed1c848](https://github.com/CoCreate-app/CoCreate-industry/commit/ed1c848e38add0f8bea70255ebd8a4bd92fa9fd8))
+
 # [1.22.0](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.21.5...v1.22.0) (2024-11-04)
 
 
