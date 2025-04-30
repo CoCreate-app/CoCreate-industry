@@ -1,3 +1,13 @@
+## [1.22.2](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.22.1...v1.22.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* added css-loader ([8c2fb07](https://github.com/CoCreate-app/CoCreate-industry/commit/8c2fb07691e0d74f23d8901df96e0990d3dc3709))
+* update query attributes ([83c4fa0](https://github.com/CoCreate-app/CoCreate-industry/commit/83c4fa0e7a3906faabc7f073541314df3a147c8f))
+* updated cocreate modules versions ([1d6ee00](https://github.com/CoCreate-app/CoCreate-industry/commit/1d6ee00cbfd2867e13c94fac11f51f1c3b23d693))
+* webpack.config and devdependencies ([6cfdd64](https://github.com/CoCreate-app/CoCreate-industry/commit/6cfdd64d5c771fb18522e8ea86d8c52e97cc3c16))
+
 ## [1.22.1](https://github.com/CoCreate-app/CoCreate-industry/compare/v1.22.0...v1.22.1) (2025-04-11)
 
 
